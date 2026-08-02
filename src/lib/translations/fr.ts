@@ -41,6 +41,7 @@ export interface Translations {
     faq: string;
     contact: string;
     devis: string;
+    promotion: string;
     langFr: string;
     langNl: string;
     langEn: string;
@@ -144,6 +145,76 @@ export interface Translations {
     }>;
   };
   distributeurs: any;
+  promotions: {
+    exclusiveOffers: string;
+    heroDescription: string;
+    discoverOffer: string;
+    needMoreInfo: string;
+    ctaDescription: string;
+    home: string;
+    promotions: string;
+    promotionStudentHousing: string;
+    heroHeadline: string;
+    heroDescriptionDetail: string;
+    viewFinancing: string;
+    seeTheHouse: string;
+    size: string;
+    price: string;
+    delivery: string;
+    floorPlanTopView: string;
+    livingSurface: string;
+    structure: string;
+    structureValue: string;
+    certification: string;
+    certificationValue: string;
+    deliveryLabel: string;
+    squareMeters: string;
+    oneWeek: string;
+    weeks: string;
+    houseDescription: string;
+    process: string;
+    howItWorks: string;
+    processDescription: string;
+    reserve: string;
+    reserveDesc: string;
+    prepare: string;
+    prepareDesc: string;
+    deliver: string;
+    deliverDesc: string;
+    enjoy: string;
+    enjoyDesc: string;
+    limitedOffer: string;
+    discount: string;
+    fastDelivery: string;
+    deliveryWeeks: string;
+    warranty: string;
+    warrantyYears: string;
+    premiumQuality: string;
+    durableMaterials: string;
+    turnkey: string;
+    readyToLive: string;
+    bookNow: string;
+    requestQuote: string;
+    depositToReserve: string;
+    financing: string;
+    accessibleMonthlyPayments: string;
+    financingDescription: string;
+    formula: string;
+    monthlyPayment: string;
+    duration: string;
+    classic: string;
+    extended: string;
+    longterm: string;
+    months: string;
+    readyToStart: string;
+    contactUs: string;
+    securePayment: string;
+    fullyRefundableDeposit: string;
+    warranty10Years: string;
+    frenchBuilder: string;
+    fastDeliveryShort: string;
+    weeksOnly: string;
+  };
   contact: {
     title: string;
     subtitle: string;
@@ -207,6 +278,7 @@ const fr: Translations = {
     faq: 'FAQ',
     contact: 'Contact',
     devis: 'Demander un devis',
+    promotion: 'Promotions',
     langFr: 'Français',
     langNl: 'Nederlands',
     langEn: 'English',
@@ -316,27 +388,27 @@ const fr: Translations = {
     },
     tiny: {
       name: 'Tiny House',
-      tagline: 'Le confort essentiel dans un espace optimisé',
+      tagline: 'Propriétaire pour moins que votre loyer',
       features: ['1 chambre', 'Salle de bain', 'Séjour', 'Cuisine'],
-      description: 'Une maison complète avec tout le confort nécessaire. Parfaite pour les couples ou les personnes souhaitant réduire leur empreinte écologique sans compromis sur le style.',
+      description: 'Compacte, intelligente et prête à vivre. Cette maison modulaire de 40 m² allie design moderne et espace de vie fonctionnel. Que vous soyez étudiant cherchant votre premier logement indépendant, jeune professionnel voulant arrêter de payer un loyer ou investisseur à la recherche d\'un bien locatif à haut rendement, cette maison vous apporte valeur, qualité et rapidité. Construction à ossature acier durable, certifiée CE, et livrée sur votre terrain en quelques semaines.',
     },
     apartment: {
       name: 'Maison Appartement',
-      tagline: 'Le bon équilibre entre espace et budget',
+      tagline: 'Le parfait équilibre entre espace et budget',
       features: ['2 chambres', 'Salle de bain', 'Séjour', 'Salle à manger'],
-      description: 'La maison idéale pour les jeunes familles ou les professionnels. Deux chambres spacieuses, un séjour lumineux et une cuisine fonctionnelle pour un confort quotidien optimal.',
+      description: "Le parfait équilibre entre espace et budget. Cette maison appartement de 60 m² offre deux chambres spacieuses, une cuisine fonctionnelle et une agencement intelligent qui optimise chaque mètre carré. Que vous soyez une jeune famille à la recherche de sa première maison, un professionnel souhaitant investir dans l'immobilier, ou simplement quelqu'un qui veut plus d'espace sans payer le prix fort — cette maison est la solution idéale. Structure en acier durable, certifiée CE et livrée en quelques semaines.",
     },
     family: {
       name: 'Maison Familiale',
-      tagline: 'L\'espace dont votre famille a besoin',
-      features: ['3–4 chambres', '2 salles de bain', 'Grande cuisine', 'Espace familial'],
-      description: 'Conçue pour les grandes familles qui refusent de faire des compromis. Quatre chambres, deux salles de bain et de grands espaces de vie pour créer des souvenirs inoubliables.',
+      tagline: 'L\'espace que votre famille mérite',
+      features: ['4 chambres', '2 salles de bain', 'Grande cuisine', 'Espaces de vie généreux'],
+      description: 'L\'espace que votre famille mérite. Cette maison familiale de 120 m² offre quatre chambres spacieuses, deux salles de bain modernes et de généreux espaces de vie conçus pour des moments de qualité en famille. Que vous soyez une famille nombreuse ayant besoin de place pour tout le monde, ou que vous refusiez simplement de faire des compromis sur le confort et la qualité — cette maison est faite pour vous. Construite avec une structure en acier durable, certifiée CE et finie aux normes les plus élevées. Plus de location. Plus d\'attente. L\'avenir de votre famille commence ici.',
     },
     capsule: {
-      name: 'Space Capsule',
-      tagline: 'Architecture futuriste et technologie premium',
-      features: ['Architecture futuriste', 'Domotique', 'Intérieur premium', 'Résidence de luxe'],
-      description: 'L\'avenir de l\'habitat est ici. La Space Capsule combine esthétique futuriste, domotique intégrée et matériaux premium pour une expérience résidentielle incomparable.',
+      name: 'Capsule Spatiale',
+      tagline: 'Un habitat non conventionnel pour les audacieux',
+      features: ['40 m²', '1 chambre', 'Structure en acier', 'Design futuriste', 'Idéal pour nomades', 'Vie minimaliste'],
+      description: 'Un habitat non conventionnel pour les audacieux. La Space Capsule n\'est pas qu\'une maison — c\'est une déclaration. Conçue pour ceux qui pensent différemment, cet espace de vie modulaire de 40 m² allie une esthétique futuriste à une fonctionnalité pratique. Parfait pour les nomades digitaux, les minimalistes, ou comme investissement Airbnb unique. Construite avec une structure en acier durable, certifiée CE et finie aux normes les plus élevées. Sortez du lot. Vivez autrement.',
     },
   },
   configurator: {
@@ -704,6 +776,76 @@ const fr: Translations = {
       amount: '1.000 €',
       pay: 'Payer l\'acompte',
     },
+  },
+  promotions: {
+    exclusiveOffers: 'Offres exclusives',
+    heroDescription: 'Découvrez nos offres promotionnelles sur nos maisons modulaires. Des prix exceptionnels pour une durée limitée.',
+    discoverOffer: 'Découvrir l\'offre',
+    needMoreInfo: 'Besoin d\'informations complémentaires?',
+    ctaDescription: 'Nos conseillers sont disponibles pour répondre à toutes vos questions et vous accompagner dans votre projet.',
+    home: 'Accueil',
+    promotions: 'Promotions',
+    promotionStudentHousing: 'Promotion — Logement étudiant',
+    heroHeadline: 'Possédez-la pour moins cher que votre loyer.',
+    heroDescriptionDetail: 'Une maison certifiée de 15 m² à structure métallique pour les étudiants, les primo-accédants et les hôtes Airbnb. Livraison en 8 à 12 semaines.',
+    viewFinancing: 'Voir le financement',
+    seeTheHouse: 'Découvrir la maison',
+    size: 'Taille',
+    price: 'Prix',
+    delivery: 'Livraison',
+    floorPlanTopView: 'Plan / Vue du dessus',
+    livingSurface: 'Surface habitable',
+    structure: 'Structure',
+    structureValue: 'Structure en acier',
+    certification: 'Certification',
+    certificationValue: 'Certifié CE',
+    deliveryLabel: 'Livraison',
+    houseDescription: 'Une maison étudiante compacte et moderne, conçue pour optimiser chaque mètre carré. Idéale pour les étudiants ou comme investissement locatif. Construction durable et livraison rapide.',
+    process: 'Processus',
+    howItWorks: 'Comment ça marche',
+    processDescription: 'Un processus simplifié pour rendre votre projet accessible et sans stress.',
+    reserve: 'Réservez',
+    reserveDesc: 'Versement de l\'acompte de 1.000€ pour sécuriser votre maison.',
+    prepare: 'Préparez',
+    prepareDesc: 'Mise en place de votre terrain et des connexions nécessaires.',
+    deliver: 'Livraison',
+    deliverDesc: 'Transport et installation sur votre terrain.',
+    enjoy: 'Profitez',
+    enjoyDesc: 'Votre maison est prête à être habitée immédiatement.',
+    limitedOffer: 'Offre limitée',
+    discount: 'REMISE',
+    fastDelivery: 'Livraison rapide',
+    deliveryWeeks: '8-12 semaines',
+    warranty: 'Garantie',
+    warrantyYears: '10 ans',
+    premiumQuality: 'Qualité premium',
+    durableMaterials: 'Matériaux durables',
+    turnkey: 'Clé en main',
+    readyToLive: 'Prête à habiter',
+    bookNow: 'Réserver maintenant',
+    requestQuote: 'Demander un devis',
+    depositToReserve: 'Acompte de 1.000€ pour réserver',
+    financing: 'Financement',
+    accessibleMonthlyPayments: 'Des mensualités accessibles',
+    financingDescription: 'Financez votre maison avec des conditions adaptées à votre budget.',
+    formula: 'Formule',
+    monthlyPayment: 'Mensualité',
+    duration: 'Durée',
+    classic: 'Classique',
+    extended: 'Étendue',
+    longterm: 'Longue durée',
+    months: 'mois',
+    readyToStart: 'Prêt à commencer votre projet? Contactez nos conseillers.',
+    contactUs: 'Nous contacter',
+    securePayment: 'Paiement sécurisé',
+    fullyRefundableDeposit: 'Acompte 100% remboursable',
+    warranty10Years: 'Garantie 10 ans',
+    frenchBuilder: 'Constructeur français',
+    fastDeliveryShort: 'Livraison rapide',
+    weeksOnly: 'semaines seulement',
+    squareMeters: 'm²',
+    oneWeek: '1 semaine',
+    weeks: 'semaines',
   },
 };
 

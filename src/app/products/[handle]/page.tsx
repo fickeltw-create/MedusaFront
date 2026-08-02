@@ -1,12 +1,13 @@
 import { redirect } from 'next/navigation';
 
 type Props = {
-  params: {
+  params: Promise<{
     handle: string;
-  };
+  }>;
 };
 
-export default function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: Props) {
   // Redirect to our embedded Medusa store's product page
-  redirect(`/shop/products/${params.handle}`);
+  const { handle } = await params;
+  redirect(`/shop/products/${handle}`);
 }

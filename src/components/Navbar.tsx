@@ -39,6 +39,7 @@ export default function Navbar() {
     { href: '/distributeurs', label: t.nav.distributeurs, external: false },
     { href: '/faq', label: t.nav.faq, external: false },
     { href: '/contact', label: t.nav.contact, external: false },
+    { href: '/promotion', label: '+', external: false },
   ];
 
   const isScrolledOrNotHome = scrolled || !isHome;

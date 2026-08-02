@@ -53,8 +53,12 @@ export interface HouseModel {
   price: number;
   monthlyPayment: number;
   financingMonths: number;
+  extendedMonthlyPayment?: number;
+  extendedMonths?: number;
+  ecoMonthlyPayment?: number;
+  ecoMonths?: number;
   discount: number;
-  deliveryStock: string;
+  deliveryStockWeeks: number;
   deliveryFactory: string;
   youtubeId?: string;
   image: string;
@@ -72,8 +76,12 @@ export const HOUSES: HouseModel[] = [
     price: 30000,
     monthlyPayment: 300,
     financingMonths: 120,
+    extendedMonthlyPayment: 225,
+    extendedMonths: 240,
+    ecoMonthlyPayment: 100,
+    ecoMonths: 480,
     discount: 33,
-    deliveryStock: '1 semaine',
+    deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     image: student1.src,
     images: [
@@ -95,8 +103,12 @@ export const HOUSES: HouseModel[] = [
     price: 80000,
     monthlyPayment: 800,
     financingMonths: 120,
+    extendedMonthlyPayment: 600,
+    extendedMonths: 240,
+    ecoMonthlyPayment: 267,
+    ecoMonths: 480,
     discount: 33,
-    deliveryStock: '1 semaine',
+    deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     youtubeId: 'KLYpZF5pYXY',
     image: tiny1.src,
@@ -115,10 +127,12 @@ export const HOUSES: HouseModel[] = [
     size: 60,
     marketPrice: 180000,
     price: 120000,
-    monthlyPayment: 436,
-    financingMonths: 420,
+    monthlyPayment: 400,
+    financingMonths: 480,
+    ecoMonthlyPayment: 267,
+    ecoMonths: 480,
     discount: 33,
-    deliveryStock: '1 semaine',
+    deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     youtubeId: 'BaHwktBs0k8',
     image: apartment1.src,
@@ -141,10 +155,10 @@ export const HOUSES: HouseModel[] = [
     size: 120,
     marketPrice: 360000,
     price: 240000,
-    monthlyPayment: 871,
-    financingMonths: 420,
+    monthlyPayment: 800,
+    financingMonths: 480,
     discount: 33,
-    deliveryStock: '1 semaine',
+    deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     youtubeId: 'FlEBOLHKQ9k',
     image: family1.src,
@@ -164,12 +178,14 @@ export const HOUSES: HouseModel[] = [
     slug: 'space-capsule',
     key: 'capsule',
     size: 40,
-    marketPrice: 180000,
-    price: 60000,
-    monthlyPayment: 580,
+    marketPrice: 120000,
+    price: 80000,
+    monthlyPayment: 800,
     financingMonths: 120,
-    discount: 67,
-    deliveryStock: '1 semaine',
+    extendedMonthlyPayment: 267,
+    extendedMonths: 480,
+    discount: 33,
+    deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     image: capsule1.src,
     images: [
