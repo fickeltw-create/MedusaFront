@@ -1,5 +1,13 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Fix: force Node to resolve IPv4 (A) records first.
+// Render's network can't route to IPv6, but nodemailer's `family: 4`
+// option does NOT reliably override Node's internal DNS resolution order,
+// which is why send.one.com was still resolving to its AAAA (IPv6) address
+// and failing with ENETUNREACH.
+dns.setDefaultResultOrder('ipv4first');
 
 // Validate environment variables on initialization
 const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASSWORD'];
@@ -21,9 +29,9 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: true
   },
-  // Force IPv4 to fix Render.com connectivity issues
+  // Kept as a secondary safeguard; dns.setDefaultResultOrder above is the real fix
   family: 4
-});
+} as nodemailer.TransportOptions);
 
 // Verify transporter connection on startup
 transporter.verify((error) => {
@@ -171,7 +179,7 @@ Envoyé le ${new Date().toLocaleString('fr-FR')}
 
 // Add GET endpoint for testing the email service
 export async function GET() {
-  // Verify Outlook connection
+  // Verify connection
   try {
     await transporter.verify();
     return NextResponse.json({
@@ -185,7 +193,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({
       status: 'error',
-      message: 'Outlook connection failed',
+      message: 'SMTP connection failed',
       error: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 });
   }
