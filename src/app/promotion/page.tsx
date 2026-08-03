@@ -91,7 +91,7 @@ export default function PromotionPage() {
                   {/* Centered text */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="label-badge bg-[#2563EB] text-white mb-3">-{house.discount}%</span>
-                    <h3 className="font-syne font-bold text-3xl text-white mb-2">{model.name}</h3>
+                    <h3 className="font-syne font-bold text-3xl text-white mb-2 text-center">{model.name}</h3>
                     <p className="text-white/80 text-sm mb-4">{house.size} m²</p>
                     <div className="flex items-center gap-2 text-white group-hover:gap-3 transition-all">
                       <span className="text-sm font-medium">{t.promotions.discoverOffer}</span>

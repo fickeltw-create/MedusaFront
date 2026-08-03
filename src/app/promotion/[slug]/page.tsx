@@ -96,7 +96,7 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-mono text-[11px] tracking-wider uppercase text-[#8891A0]">{t.promotions.delivery}</span>
-                <span className="font-sans font-semibold text-xl">8–12 wks</span>
+                <span className="font-sans font-semibold text-xl">{t.promotions.deliveryWeeks}</span>
               </div>
             </div>
           </div>
@@ -275,22 +275,22 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-            <div className="pr-7 relative">
+            <div className="relative">
               <span className="font-sans font-semibold text-2xl text-[#2563EB] mb-3.5 block">01</span>
               <h3 className="text-sm font-semibold mb-2 text-[#0F172A]">{t.promotions.reserve}</h3>
               <p className="text-xs text-[#6B7280] leading-relaxed m-0">{t.promotions.reserveDesc}</p>
             </div>
-            <div className="pl-7 border-l border-gray-200 relative md:col-span-1 lg:col-span-1">
+            <div className="relative lg:pl-7 lg:border-l lg:border-gray-200">
               <span className="font-sans font-semibold text-2xl text-[#2563EB] mb-3.5 block">02</span>
               <h3 className="text-sm font-semibold mb-2 text-[#0F172A]">{t.promotions.prepare}</h3>
               <p className="text-xs text-[#6B7280] leading-relaxed m-0">{t.promotions.prepareDesc}</p>
             </div>
-            <div className="pl-7 border-l border-gray-200 relative md:col-span-1 lg:col-span-1 md:pl-0 md:border-l-0 lg:pl-7 lg:border-l">
+            <div className="relative lg:pl-7 lg:border-l lg:border-gray-200">
               <span className="font-sans font-semibold text-2xl text-[#2563EB] mb-3.5 block">03</span>
               <h3 className="text-sm font-semibold mb-2 text-[#0F172A]">{t.promotions.deliver}</h3>
               <p className="text-xs text-[#6B7280] leading-relaxed m-0">{t.promotions.deliverDesc}</p>
             </div>
-            <div className="pl-7 border-l border-gray-200 relative">
+            <div className="relative lg:pl-7 lg:border-l lg:border-gray-200">
               <span className="font-sans font-semibold text-2xl text-[#2563EB] mb-3.5 block">04</span>
               <h3 className="text-sm font-semibold mb-2 text-[#0F172A]">{t.promotions.enjoy}</h3>
               <p className="text-xs text-[#6B7280] leading-relaxed m-0">{t.promotions.enjoyDesc}</p>
