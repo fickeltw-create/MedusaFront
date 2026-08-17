@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
-import { ShoppingCart, Heart, Share2, Check, ChevronLeft } from 'lucide-react';
+import { ShoppingCart, Heart, Share2, Check, ChevronLeft, Maximize2 } from 'lucide-react';
+import ImageLightbox, { useImageLightbox } from '@/components/ImageLightbox';
 
 type Variant = {
   id: string;
@@ -46,6 +47,7 @@ export default function ProductClient({ product, relatedProducts, handle }: Prod
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const { isOpen, currentIndex, openLightbox, closeLightbox } = useImageLightbox();
 
   const handleAddToCart = () => {
     addItem({
@@ -105,19 +107,29 @@ export default function ProductClient({ product, relatedProducts, handle }: Prod
               </div>
             </div>
 
-            <div className="aspect-square w-full overflow-hidden rounded-3xl bg-gray-100">
+            <button
+              onClick={() => openLightbox(selectedImage)}
+              className="aspect-square w-full overflow-hidden rounded-3xl bg-gray-100 relative group cursor-zoom-in"
+            >
               {product.images[selectedImage] ? (
                 <img
                   src={product.images[selectedImage]}
                   alt={product.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               ) : (
                 <div className="h-full w-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
                   <span className="text-8xl">📦</span>
                 </div>
               )}
-            </div>
+              {/* Zoom overlay button */}
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                  <Maximize2 className="h-4 w-4" />
+                  Click to expand
+                </div>
+              </div>
+            </button>
           </div>
 
           {/* Product info */}
@@ -263,6 +275,15 @@ export default function ProductClient({ product, relatedProducts, handle }: Prod
             </div>
           </section>
         )}
+
+        {/* Image Lightbox */}
+        <ImageLightbox
+          images={product.images}
+          initialIndex={currentIndex}
+          isOpen={isOpen}
+          onClose={closeLightbox}
+          title={product.title}
+        />
       </div>
     </div>
   );

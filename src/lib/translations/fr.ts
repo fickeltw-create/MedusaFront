@@ -107,7 +107,44 @@ export interface Translations {
     video: string;
     techSpecs: string;
   };
-  models: any;
+  models: {
+    student: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+    tiny: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+    apartment: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+    family: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+    foldable: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+    capsule: {
+      name: string;
+      tagline: string;
+      features: string[];
+      description: string;
+    };
+  };
   configurator: any;
   financing: any;
   energy: {
@@ -143,6 +180,10 @@ export interface Translations {
       text: string;
       rating: number;
     }>;
+  };
+  videoSection: {
+    title: string;
+    subtitle: string;
   };
   distributeurs: any;
   promotions: {
@@ -347,15 +388,10 @@ const fr: Translations = {
     ctaSubtitle: 'Configurez chaque détail et visualisez en temps réel.',
     configure: 'Configurer',
     exploreModels: 'Explorer les modèles',
-    previewBadge: 'Modèles premium',
-    previewTitle: 'Les modèles Modura',
-    visitShop: 'Visiter notre boutique',
-    boutiqueTitle: 'Complétez votre projet avec la Boutique Modura',
-    boutiqueSubtitle: 'Retrouvez les accessoires, options et services pour finaliser votre modèle directement dans la Boutique Modura.',
     viewAll: 'Voir tout le catalogue',
     from: 'À partir de',
     perMonth: '/mois',
-    size: 'Surface',
+    size: 'Taille',
     models: 'modèle(s)',
     discover: 'Découvrir',
     marketPrice: 'Prix du marché',
@@ -378,37 +414,48 @@ const fr: Translations = {
     floorPlan: 'Plan d\'étage',
     video: 'Vidéo de présentation',
     techSpecs: 'Fiche technique',
+    previewBadge: 'Modèles premium',
+    previewTitle: 'Les modèles Modura',
+    boutiqueTitle: 'La Boutique Modura',
+    boutiqueSubtitle: 'Trouvez les accessoires, options et services pour finaliser votre modèle directement dans la boutique Modura.',
+    visitShop: 'Visiter notre boutique',
   },
   models: {
     student: {
       name: 'Maison Étudiante',
-      tagline: 'Idéale pour étudiants et location Airbnb',
+      tagline: 'Idéale pour les étudiants et la location Airbnb',
       features: ['Studio', 'Salle de bain', 'Kitchenette', 'Logement étudiant', 'Usage Airbnb'],
-      description: 'La solution parfaite pour les étudiants cherchant leur indépendance ou les investisseurs souhaitant générer des revenus locatifs. Compacte, moderne et entièrement équipée.',
+      description: 'La solution parfaite pour les étudiants en quête d\'indépendance ou les investisseurs souhaitant générer des revenus locatifs. Compacte, moderne et entièrement équipée.',
     },
     tiny: {
-      name: 'Tiny House',
-      tagline: 'Propriétaire pour moins que votre loyer',
-      features: ['1 chambre', 'Salle de bain', 'Séjour', 'Cuisine'],
-      description: 'Compacte, intelligente et prête à vivre. Cette maison modulaire de 40 m² allie design moderne et espace de vie fonctionnel. Que vous soyez étudiant cherchant votre premier logement indépendant, jeune professionnel voulant arrêter de payer un loyer ou investisseur à la recherche d\'un bien locatif à haut rendement, cette maison vous apporte valeur, qualité et rapidité. Construction à ossature acier durable, certifiée CE, et livrée sur votre terrain en quelques semaines.',
+      name: 'Mini-Maison',
+      tagline: 'Devenez propriétaire pour moins que votre loyer',
+      features: ['1 chambre', 'Salle de bain', 'Salon', 'Cuisine'],
+      description: 'Compacte, intelligente et prête à habiter. Cette maison modulaire de 40 m² allie design moderne et vie fonctionnelle. Que vous soyez un étudiant cherchant votre premier espace indépendant, un jeune professionnel qui veut arrêter de payer un loyer, ou un investisseur à la recherche d\'un bien locatif à haut rendement — cette maison offre valeur, qualité et rapidité. Construction durable à ossature acier, certifiée CE, livrée sur votre terrain en quelques semaines.',
     },
     apartment: {
       name: 'Maison Appartement',
       tagline: 'Le parfait équilibre entre espace et budget',
-      features: ['2 chambres', 'Salle de bain', 'Séjour', 'Salle à manger'],
-      description: "Le parfait équilibre entre espace et budget. Cette maison appartement de 60 m² offre deux chambres spacieuses, une cuisine fonctionnelle et une agencement intelligent qui optimise chaque mètre carré. Que vous soyez une jeune famille à la recherche de sa première maison, un professionnel souhaitant investir dans l'immobilier, ou simplement quelqu'un qui veut plus d'espace sans payer le prix fort — cette maison est la solution idéale. Structure en acier durable, certifiée CE et livrée en quelques semaines.",
+      features: ['2 chambres', 'Salle de bain', 'Salon', 'Salle à manger'],
+      description: 'Le parfait équilibre entre espace et budget. Cette maison appartement de 60 m² offre deux chambres spacieuses, une cuisine fonctionnelle et une agencement intelligente qui optimise chaque mètre carré. Que vous soyez une jeune famille à la recherche de votre première maison, un professionnel qui souhaite investir dans l\'immobilier, ou quelqu\'un qui veut simplement plus d\'espace sans payer le prix fort — cette maison est la solution idéale. Ossature acier durable, certifiée CE, livrée en quelques semaines.',
     },
     family: {
       name: 'Maison Familiale',
       tagline: 'L\'espace que votre famille mérite',
       features: ['4 chambres', '2 salles de bain', 'Grande cuisine', 'Espaces de vie généreux'],
-      description: 'L\'espace que votre famille mérite. Cette maison familiale de 120 m² offre quatre chambres spacieuses, deux salles de bain modernes et de généreux espaces de vie conçus pour des moments de qualité en famille. Que vous soyez une famille nombreuse ayant besoin de place pour tout le monde, ou que vous refusiez simplement de faire des compromis sur le confort et la qualité — cette maison est faite pour vous. Construite avec une structure en acier durable, certifiée CE et finie aux normes les plus élevées. Plus de location. Plus d\'attente. L\'avenir de votre famille commence ici.',
+      description: 'L\'espace que votre famille mérite. Cette maison familiale de 120 m² offre quatre chambres spacieuses, deux salles de bain modernes et des espaces de vie généreux conçus pour passer du temps de qualité ensemble. Que vous soyez une famille grandissante qui a besoin de place pour tout le monde, ou que vous refusiez simplement de faire des compromis sur le confort et la qualité — cette maison est parfaite. Construite avec une ossature acier durable, certifiée CE, et finie selon les normes les plus élevées. Plus de loyer. Plus d\'attente. L\'avenir de votre famille commence ici.',
+    },
+    foldable: {
+      name: 'Maison Pliable',
+      tagline: 'Portable, flexible et déployable en quelques heures',
+      features: ['Portable', 'Pliable', 'Déploiement rapide', 'Maison de vacances'],
+      description: 'La révolution dans le logement modulaire. Cette maison se déploie en quelques heures seulement, vous permettant de l\'installer où vous le souhaitez.',
     },
     capsule: {
       name: 'Capsule Spatiale',
       tagline: 'Un habitat non conventionnel pour les audacieux',
-      features: ['40 m²', '1 chambre', 'Structure en acier', 'Design futuriste', 'Idéal pour nomades', 'Vie minimaliste'],
-      description: 'Un habitat non conventionnel pour les audacieux. La Space Capsule n\'est pas qu\'une maison — c\'est une déclaration. Conçue pour ceux qui pensent différemment, cet espace de vie modulaire de 40 m² allie une esthétique futuriste à une fonctionnalité pratique. Parfait pour les nomades digitaux, les minimalistes, ou comme investissement Airbnb unique. Construite avec une structure en acier durable, certifiée CE et finie aux normes les plus élevées. Sortez du lot. Vivez autrement.',
+      features: ['40 m²', '1 chambre', 'Ossature acier', 'Design futuriste', 'Idéale pour les nomades', 'Vie minimaliste'],
+      description: 'Un habitat non conventionnel pour les audacieux. La Space Capsule n\'est pas seulement une maison — c\'est un statement. Conçue pour ceux qui pensent différemment, cet espace de vie modulaire de 40 m² allie esthétique futuriste et fonctionnalité pratique. Parfait pour les nomades digitaux, les minimalistes, ou comme un investissement Airbnb unique. Construite avec une ossature acier durable, certifiée CE, et finie selon les normes les plus élevées. Sortez du lot. Vivez différemment.',
     },
   },
   configurator: {
@@ -493,6 +540,40 @@ const fr: Translations = {
     summaryPrice: 'Prix',
     summaryDeposit: 'Apport',
     summaryMonthly: 'Mensualité',
+    modeCredit: 'Simuler un crédit',
+    modeCreditTitle: 'Voir la mensualité et le coût total',
+    modeCreditDesc: 'Choisissez un apport et une durée, puis voyez ce que vous remboursez chaque mois.',
+    modeInvestment: 'Simuler un investissement',
+    modeInvestmentTitle: 'Projection sur 1 à 10 ans',
+    modeInvestmentDesc: "Comparez stats, courbe et détails pour pousser la décision d'investir.",
+    modelMonthlyTitle: 'Mensualités du modèle',
+    investmentHeadline: 'Projection sur 1 à 10 ans avec dividendes',
+    investmentMode: 'Mode investissement',
+    statsTab: 'Stats',
+    detailsTab: 'Détails',
+    currentValue: 'Valeur actuelle',
+    annualDividend: 'Dividende annuel',
+    annualGrowth: 'Croissance annuelle',
+    tenYearReturn: 'Retour potentiel 10 ans',
+    modelPrice: 'Prix du modèle',
+    annualGain: 'Plus-value annuelle',
+    cautiousEstimate: 'Estimation prudente',
+    currentPayoutBase: 'Base cible 15 %',
+    curveTitle: 'Projection du rendement sur 10 ans',
+    allocationTitle: 'Répartition du potentiel',
+    yearLabel: 'Année',
+    projectionTitle: 'Projection du rendement',
+    dividendsCumulative: 'Dividendes cumulés',
+    projectedValue: 'Valeur projetée',
+    estimatedGain: 'Plus-value estimée',
+    totalPotentialReturn: 'Rendement total potentiel',
+    responseUnder24h: 'Réponse sous 24h',
+    modeLabel: 'Mode',
+    creditLabel: 'Crédit',
+    investmentLabel: 'Investissement',
+    estimatedAnnualDividend: 'Dividende annuel estimé',
+    requestInvestmentSim: 'Demander une simulation investisseur',
+    submitSimulation: 'Demander la simulation',
   },
   energy: {
     title: 'Solutions Énergétiques',
@@ -583,6 +664,10 @@ const fr: Translations = {
         rating: 5,
       },
     ],
+  },
+  videoSection: {
+    title: "Comment ça marche ?",
+    subtitle: "Découvrez comment votre projet de maison modulaire va se dérouler, de la conception à la livraison"
   },
   faq: {
     title: 'Questions Fréquentes',

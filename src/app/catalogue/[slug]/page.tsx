@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
@@ -11,9 +11,10 @@ import { HOUSES, formatPrice } from '@/lib/houses';
 import {
   ArrowRight, Check, ChevronLeft, ChevronRight,
   Download, Calendar, Truck, Factory, CreditCard, Shield,
-  Palette, Home, Maximize2
+  Palette, Home, Maximize2, FileText
 } from 'lucide-react';
 import ReservationModal from '@/components/ReservationModal';
+import ImageLightbox, { useImageLightbox } from '@/components/ImageLightbox';
 
 const SWATCHES: { key: ExteriorColor; color: string; border: string; label: string }[] = [
   { key: 'white',    color: '#F2F0EB', border: '#C8C4BC', label: 'Blanc' },
@@ -28,8 +29,8 @@ const ROOF_OPTIONS: { key: RoofType; label: string; icon: string }[] = [
   { key: 'metal',   label: 'Métal',         icon: '◆' },
 ];
 
-export default function HouseDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function HouseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const { t } = useI18n();
 
   const [activeTab, setActiveTab] = useState<'features' | 'specs' | 'delivery'>('features');
@@ -38,10 +39,15 @@ export default function HouseDetailPage({ params }: { params: { slug: string } }
   const [roofType, setRoofType] = useState<RoofType>('flat');
   const [viewMode, setViewMode] = useState<'3d' | 'photo'>('3d');
   const [photoIndex, setPhotoIndex] = useState(0);
+  const { isOpen, currentIndex, openLightbox, closeLightbox } = useImageLightbox();
 
   const house = HOUSES.find(h => h.slug === slug);
   if (!house) notFound();
   const model = t.models[house.key];
+  
+  // Separate images from any remaining floor plan PDFs (if exists)
+  const imageFiles = house.images; // All images now including PNG floor plans
+  const floorPlanPdf = house.images.find(img => img.endsWith('.pdf'));
 
   return (
     <main className="min-h-screen bg-white">
@@ -64,32 +70,50 @@ export default function HouseDetailPage({ params }: { params: { slug: string } }
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* ── Left: Photos (static) ── */}
           <div>
-            <div className="relative rounded-2xl overflow-hidden group aspect-[4/3] shadow-premium">
-              <img src={house.images[photoIndex]} alt={model.name} className="w-full h-full object-cover" />
+            <div
+              onClick={() => openLightbox(photoIndex)}
+              className="relative w-full rounded-2xl overflow-hidden group aspect-[4/3] shadow-premium cursor-zoom-in"
+            >
+              <img src={imageFiles[photoIndex]} alt={model.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               {house.badge && <span className="absolute top-4 left-4 label-badge bg-[#2563EB] text-white">{house.badge}</span>}
-              <button onClick={() => setPhotoIndex(i => (i - 1 + house.images.length) % house.images.length)}
+              <button onClick={(e) => { e.stopPropagation(); setPhotoIndex(i => (i - 1 + imageFiles.length) % imageFiles.length); }}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity">
                 <ChevronLeft size={18} />
               </button>
-              <button onClick={() => setPhotoIndex(i => (i + 1) % house.images.length)}
+              <button onClick={(e) => { e.stopPropagation(); setPhotoIndex(i => (i + 1) % imageFiles.length); }}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity">
                 <ChevronRight size={18} />
               </button>
+              {/* Zoom overlay button */}
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                  <Maximize2 className="h-4 w-4" />
+                  Click to expand
+                </div>
+              </div>
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-                {house.images.map((_, i) => (
-                  <button key={i} onClick={() => setPhotoIndex(i)}
+                {imageFiles.map((_, i) => (
+                  <button key={i} onClick={(e) => { e.stopPropagation(); setPhotoIndex(i); }}
                     className={`rounded-full transition-all ${i === photoIndex ? 'bg-white w-4 h-1.5' : 'bg-white/50 w-1.5 h-1.5'}`} />
                 ))}
               </div>
             </div>
             <div className="flex gap-2 mt-2">
-              {house.images.map((img, i) => (
+              {imageFiles.map((img, i) => (
                 <button key={i} onClick={() => setPhotoIndex(i)}
                   className={`flex-1 aspect-square rounded-xl overflow-hidden border-2 transition-all ${photoIndex === i ? 'border-[#2563EB]' : 'border-transparent opacity-60 hover:opacity-80'}`}>
                   <img src={img} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
+              {/* Floor plan PDF button - only show if there's actually a PDF */}
+              {floorPlanPdf && (
+                <a href={floorPlanPdf} target="_blank" rel="noopener noreferrer" download
+                  className="flex-1 aspect-square rounded-xl overflow-hidden border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-1 hover:border-[#2563EB] hover:bg-blue-50 transition-all">
+                  <FileText size={24} className="text-gray-400" />
+                  <span className="text-xs text-gray-500">Plan</span>
+                </a>
+              )}
             </div>
             {/* Quick config CTA */}
           </div>
@@ -224,6 +248,15 @@ export default function HouseDetailPage({ params }: { params: { slug: string } }
       </div>
 
       {showReservation && <ReservationModal house={house} onClose={() => setShowReservation(false)} />}
+      
+      {/* Image Lightbox */}
+      <ImageLightbox
+        images={imageFiles}
+        initialIndex={currentIndex}
+        isOpen={isOpen}
+        onClose={closeLightbox}
+        title={model.name}
+      />
       <Footer />
     </main>
   );

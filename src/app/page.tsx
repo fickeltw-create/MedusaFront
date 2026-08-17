@@ -7,7 +7,7 @@ import WhyModura from '@/components/sections/WhyModura';
 import StatsSection from '@/components/sections/StatsSection';
 import CatalogPreview from '@/components/sections/CatalogPreview';
 import FAQSection from '@/components/sections/FAQSection';
-import TestimonialsSection from '@/components/sections/TestimonialsSection';
+import VideoParallaxSection from '@/components/sections/VideoParallaxSection';
 
 export default function HomePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
       <StatsSection />
       <WhyModura />
       <CatalogPreview />
-      <TestimonialsSection />
+      <VideoParallaxSection />
       <FAQSection />
       <Footer />
     </main>

@@ -1,12 +1,14 @@
 // Numbered images first (1.jpg, 2.jpg, 3.jpg, 4.jpg) in sequence, followed by additional images
 // Maison Étudiante (Student House)
 import student1 from "../Models plans/Maison Étudiante/1.jpg";
-import student2 from "../Models plans/Maison Étudiante/2.jpg";
-import studentExtra1 from "../Models plans/Maison Étudiante/Planner5d_AI_Studio_gpt-image-2-image-1 (1).jpg";
-import studentExtra2 from "../Models plans/Maison Étudiante/Planner5d_AI_Studio_gpt-image-2-image-1 (3).jpg";
-import studentExtra3 from "../Models plans/Maison Étudiante/Planner5d_AI_Studio_nano-banana-2-image-1 (1).jpg";
-import studentExtra4 from "../Models plans/Maison Étudiante/Planner5d_AI_Studio_nano-banana-2-image-1 (2).jpg";
-import studentExtra5 from "../Models plans/Maison Étudiante/Planner5d_AI_Studio_nano-banana-2-image-1.jpg";
+import student2 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-interior-living-02.jpg";
+import student3 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-bedroom-view-03.jpg";
+import student4 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-kitchenette-04.jpg";
+import student5 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-bathroom-05.jpg";
+import student6 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-exterior-angle-06.jpg";
+import student7 from "../Models plans/Maison Étudiante/modura-be-15m2-maison-etudiante-student-housing-studentenhuisvesting-overview-07.jpg";
+// Floor plan is hosted from public folder
+const studentFloorPlan = "/Floor plans/Floor 15.png";
 
 // Tiny House (40m²)
 import tiny1 from "../Models plans/40 m² PETITE MAISON/1.jpg";
@@ -15,6 +17,8 @@ import tiny3 from "../Models plans/40 m² PETITE MAISON/3.jpg";
 import tiny4 from "../Models plans/40 m² PETITE MAISON/4.jpg";
 import tiny5 from "../Models plans/40 m² PETITE MAISON/5.jpg";
 import tiny6 from "../Models plans/40 m² PETITE MAISON/6.jpg";
+// Floor plan is hosted from public folder
+const tinyFloorPlan = "/Floor plans/Modura.be MODULE FRAME 40 M² WITH LGS FRAMES 89 MM AND DETAILS-1.png";
 
 // Apartment House (60m²)
 import apartment1 from "../Models plans/60 M2/1.jpg";
@@ -25,6 +29,8 @@ import apartmentExtra1 from "../Models plans/60 M2/Planner5d_AI_Studio_gpt-image
 import apartmentExtra2 from "../Models plans/60 M2/Planner5d_AI_Studio_gpt-image-2-image-1 (4).jpg";
 import apartmentExtra3 from "../Models plans/60 M2/Planner5d_AI_Studio_gpt-image-2-image-1 (5).jpg";
 import apartmentExtra4 from "../Models plans/60 M2/Planner5d_AI_Studio_gpt-image-2-image-1.jpg";
+// Floor plan is hosted from public folder
+const apartmentFloorPlan = "/Floor plans/Modura.be 2D MODULE FRAMES 60 M² (4 x 15 m² + 1 x 15m²) WITH LGS FRAMES 89 MM AND DETAILS-1.png";
 
 // Family House (120m²)
 import family1 from "../Models plans/Maison 120 m²/1.jpg";
@@ -35,6 +41,8 @@ import familyExtra1 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt
 import familyExtra2 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt-image-2-image-1 (3).jpg";
 import familyExtra3 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt-image-2-image-1 (4).jpg";
 import familyExtra4 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt-image-2-image-1.jpg";
+// Floor plan is hosted from public folder
+const familyFloorPlan = "/Floor plans/Modura.be 2D MODULE FRAMES 120 M² (8 x 15 m² + 1 x 15m²) WITH LGS FRAMES 89 MM AND DETAILS (1)-1.png";
 
 // Space Capsule
 import capsule1 from "../Models plans/spacecapsule/1.jpg";
@@ -87,11 +95,12 @@ export const HOUSES: HouseModel[] = [
     images: [
       student1.src,
       student2.src,
-      studentExtra1.src,
-      studentExtra2.src,
-      studentExtra3.src,
-      studentExtra4.src,
-      studentExtra5.src,
+      student3.src,
+      student4.src,
+      student5.src,
+      student6.src,
+      student7.src,
+      studentFloorPlan,
     ],
     badge: 'Populaire',
   },
@@ -119,6 +128,7 @@ export const HOUSES: HouseModel[] = [
       tiny4.src,
       tiny5.src,
       tiny6.src,
+      tinyFloorPlan,
     ],
   },
   {
@@ -145,6 +155,7 @@ export const HOUSES: HouseModel[] = [
       apartmentExtra2.src,
       apartmentExtra3.src,
       apartmentExtra4.src,
+      apartmentFloorPlan,
     ],
     badge: 'Meilleure vente',
     isNew: false,
@@ -171,6 +182,7 @@ export const HOUSES: HouseModel[] = [
       familyExtra2.src,
       familyExtra3.src,
       familyExtra4.src,
+      familyFloorPlan,
     ],
     isNew: false,
   },
