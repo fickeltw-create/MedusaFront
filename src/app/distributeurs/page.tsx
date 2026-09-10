@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useI18n } from '@/lib/i18n';
-import { supabase } from '@/lib/supabase';
 import { Users, ArrowRight, Loader2, Check, Star, Shield, Globe, Briefcase, TrendingUp, Download, BarChart2 } from 'lucide-react';
 
 type Tab = 'info' | 'apply' | 'portal';
@@ -20,7 +19,10 @@ export default function DistributeursPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await supabase.from('leads').insert({
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
         type: form.type === 'Installateur' ? 'installer' : 'distributor',
         name: form.name,
         email: form.email,
@@ -29,7 +31,9 @@ export default function DistributeursPage() {
         region: form.region,
         partnership_type: form.type,
         message: form.message,
+        }),
       });
+      if (!response.ok) throw new Error('Lead creation failed');
       setSuccess(true);
     } finally {
       setLoading(false);

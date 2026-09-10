@@ -43,7 +43,7 @@ const MobileActionButtons = ({
         <button
           onClick={onOpenSort}
           className="flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Open sort options"
+          aria-label="Ouvrir les options de tri"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const MobileActionButtons = ({
         <button
           onClick={onOpenFilters}
           className="flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Open filters"
+          aria-label="Ouvrir les filtres"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { X, Shield, CreditCard, Check, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import { HouseModel, formatPrice } from '@/lib/houses';
-import { supabase } from '@/lib/supabase';
 
 interface Props {
   house: HouseModel;
@@ -24,16 +23,19 @@ export default function ReservationModal({ house, onClose }: Props) {
     setLoading(true);
     setError('');
     try {
-      // First save pending reservation to Supabase
-      const { error: dbError } = await supabase.from('reservations').insert({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        model: house.slug,
-        status: 'pending_payment',
-        amount: 100000,
+      // First save the pending reservation in Neon through the server API.
+      const reservationResponse = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          model: house.slug,
+          amount: 100000,
+        }),
       });
-      if (dbError) throw dbError;
+      if (!reservationResponse.ok) throw new Error('Reservation creation failed');
 
       // Create Stripe checkout session
       const response = await fetch('/api/create-stripe-session', {

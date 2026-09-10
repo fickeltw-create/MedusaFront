@@ -14,7 +14,7 @@ type SortSelectorProps = {
 const SortSelector = memo(function SortSelector({ options, selectedValue, onChange }: SortSelectorProps) {
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-slate-900">Sort</h3>
+      <h3 className="text-sm font-semibold text-slate-900">Trier</h3>
       <div className="space-y-2">
         {options.map((option) => (
           <button

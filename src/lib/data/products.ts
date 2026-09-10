@@ -7,6 +7,14 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
 
+const getMinimumProductPrice = (product: HttpTypes.StoreProduct) => {
+  const prices = (product.variants || [])
+    .map((variant) => variant.calculated_price?.calculated_amount)
+    .filter((amount): amount is number => typeof amount === "number")
+
+  return prices.length ? Math.min(...prices) : null
+}
+
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
@@ -55,7 +63,7 @@ export const listProducts = async ({
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
-      `/store/products`,
+      "/store/products",
       {
         method: "GET",
         query: {
@@ -68,7 +76,7 @@ export const listProducts = async ({
         },
         headers,
         next,
-        cache: "force-cache",
+        cache: "no-store",
       }
     )
     .then(({ products, count }) => {
@@ -93,11 +101,15 @@ export const listProductsWithSort = async ({
   page = 0,
   queryParams,
   sortBy = "created_at",
+  minPrice,
+  maxPrice,
   countryCode,
 }: {
   page?: number
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
   sortBy?: SortOptions
+  minPrice?: number
+  maxPrice?: number
   countryCode: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
@@ -118,17 +130,29 @@ export const listProductsWithSort = async ({
   })
 
   const sortedProducts = sortProducts(products, sortBy)
+  const hasPriceFilter = minPrice !== undefined || maxPrice !== undefined
+  const filteredProducts = sortedProducts.filter((product) => {
+    if (!hasPriceFilter) {
+      return true
+    }
+
+    const productPrice = getMinimumProductPrice(product)
+
+    return (
+      productPrice !== null &&
+      (minPrice === undefined || productPrice >= minPrice) &&
+      (maxPrice === undefined || productPrice <= maxPrice)
+    )
+  })
 
   const pageParam = (page - 1) * limit
-
   const nextPage = count > pageParam + limit ? pageParam + limit : null
-
-  const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
+  const paginatedProducts = filteredProducts.slice(pageParam, pageParam + limit)
 
   return {
     response: {
       products: paginatedProducts,
-      count,
+      count: hasPriceFilter ? filteredProducts.length : count,
     },
     nextPage,
     queryParams,

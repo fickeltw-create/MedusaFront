@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
-import { ShoppingCart, Heart, Share2, Check, ChevronLeft, Maximize2 } from 'lucide-react';
+import { ShoppingCart, Share2, Check, ChevronLeft, Maximize2 } from 'lucide-react';
 import ImageLightbox, { useImageLightbox } from '@/components/ImageLightbox';
 
 type Variant = {
@@ -46,7 +46,6 @@ export default function ProductClient({ product, relatedProducts, handle }: Prod
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const { isOpen, currentIndex, openLightbox, closeLightbox } = useImageLightbox();
 
   const handleAddToCart = () => {
@@ -218,10 +217,11 @@ export default function ProductClient({ product, relatedProducts, handle }: Prod
                   )}
                 </button>
                 <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className={`flex h-14 w-14 items-center justify-center rounded-full border transition-all ${isWishlisted ? 'border-red-200 bg-red-50 text-red-500' : 'border-gray-300 text-gray-600 hover:bg-gray-50'}`}
+                  onClick={handleAddToCart}
+                  aria-label="Add to cart"
+                  className={`flex h-14 w-14 items-center justify-center rounded-full border transition-all ${addedToCart ? 'border-green-200 bg-green-50 text-green-600' : 'border-gray-300 text-gray-600 hover:bg-gray-50'}`}
                 >
-                  <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-current' : ''}`} />
+                  {addedToCart ? <Check className="h-5 w-5" /> : <ShoppingCart className="h-5 w-5" />}
                 </button>
                 <button className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all">
                   <Share2 className="h-5 w-5" />

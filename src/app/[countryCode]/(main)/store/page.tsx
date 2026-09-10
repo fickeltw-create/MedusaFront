@@ -5,8 +5,8 @@ import StoreTemplate from "@modules/store/templates"
 import { listCategories } from "@lib/data/categories"
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "Explore all of our products.",
+  title: "Boutique",
+  description: "Découvrez tous nos produits.",
 }
 
 type Params = {
@@ -14,6 +14,9 @@ type Params = {
     sortBy?: SortOptions
     page?: string
     category?: string
+    min_price?: string
+    max_price?: string
+    view?: "grid" | "list"
   }>
   params: Promise<{
     countryCode: string
@@ -21,16 +24,22 @@ type Params = {
 }
 
 export default async function StorePage(props: Params) {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
-  const { sortBy, page, category: selectedCategoryHandle } = searchParams
+  const params = await props.params
+  const searchParams = await props.searchParams
+  const {
+    sortBy,
+    page,
+    category: selectedCategoryHandle,
+    min_price: minPrice,
+    max_price: maxPrice,
+    view,
+  } = searchParams
 
   const categories = await listCategories({
     limit: 100,
     fields: "id,handle,name,parent_category",
   })
 
-  const topCategories = categories.filter((category) => !category.parent_category)
   const selectedCategory = categories.find(
     (category) => category.handle === selectedCategoryHandle
   )
@@ -39,8 +48,11 @@ export default async function StorePage(props: Params) {
     <StoreTemplate
       sortBy={sortBy}
       page={page}
+      view={view}
+      minPrice={minPrice}
+      maxPrice={maxPrice}
       countryCode={params.countryCode}
-      categories={topCategories}
+      categories={categories}
       selectedCategory={selectedCategory}
     />
   )

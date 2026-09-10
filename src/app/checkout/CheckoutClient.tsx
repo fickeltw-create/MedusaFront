@@ -52,14 +52,31 @@ export default function CheckoutClient() {
 
   const placeOrder = async () => {
     setIsProcessing(true);
-    
-    // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Clear cart after successful order
-    clearCart();
-    setIsProcessing(false);
-    setCurrentStep(3);
+
+    try {
+      const response = await fetch('/api/create-stripe-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+          customerName: `${shippingInfo.firstName} ${shippingInfo.lastName}`.trim(),
+          customerEmail: shippingInfo.email,
+          customerPhone: shippingInfo.phone,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.url) {
+        throw new Error(result.error || 'Impossible de créer la session de paiement');
+      }
+      window.location.assign(result.url);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Impossible de démarrer le paiement');
+      setIsProcessing(false);
+    }
   };
 
   // Empty cart state

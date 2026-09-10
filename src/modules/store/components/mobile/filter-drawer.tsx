@@ -1,7 +1,7 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
@@ -22,9 +22,9 @@ type FilterDrawerProps = {
 }
 
 const SORT_OPTIONS: { value: SortOptions; label: string }[] = [
-  { value: "created_at", label: "Latest Arrivals" },
-  { value: "price_asc", label: "Price: Low → High" },
-  { value: "price_desc", label: "Price: High → Low" },
+  { value: "created_at", label: "Nouveautés" },
+  { value: "price_asc", label: "Prix : croissant" },
+  { value: "price_desc", label: "Prix : décroissant" },
 ]
 
 const FilterDrawer = ({
@@ -37,6 +37,47 @@ const FilterDrawer = ({
 }: FilterDrawerProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  const [minPrice, setMinPrice] = useState(searchParams.get("min_price") || "")
+  const [maxPrice, setMaxPrice] = useState(searchParams.get("max_price") || "")
+  const [priceError, setPriceError] = useState("")
+
+  useEffect(() => {
+    setMinPrice(searchParams.get("min_price") || "")
+    setMaxPrice(searchParams.get("max_price") || "")
+    setPriceError("")
+  }, [searchParams])
+
+  const handlePriceApply = () => {
+    const minimum = minPrice.trim() ? Number(minPrice) : undefined
+    const maximum = maxPrice.trim() ? Number(maxPrice) : undefined
+
+    if (
+      (minimum !== undefined && (!Number.isFinite(minimum) || minimum < 0)) ||
+      (maximum !== undefined && (!Number.isFinite(maximum) || maximum < 0))
+    ) {
+      setPriceError("Saisissez des prix valides supérieurs ou égaux à 0.")
+      return
+    }
+
+    if (minimum !== undefined && maximum !== undefined && minimum > maximum) {
+      setPriceError("Le prix minimum ne peut pas être supérieur au prix maximum.")
+      return
+    }
+
+    const params = new URLSearchParams(searchParams)
+
+    if (minimum === undefined) params.delete("min_price")
+    else params.set("min_price", minimum.toString())
+
+    if (maximum === undefined) params.delete("max_price")
+    else params.set("max_price", maximum.toString())
+
+    params.delete("page")
+    setPriceError("")
+    router.push("?" + params.toString())
+    onClose()
+  }
 
   const handleSortChange = (newSortBy: SortOptions) => {
     const params = new URLSearchParams(searchParams)
@@ -98,7 +139,7 @@ const FilterDrawer = ({
                     {type === "sort" ? (
                       <div className="space-y-2">
                         <Dialog.Title className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                          Sort by
+                          Trier par
                         </Dialog.Title>
                         {SORT_OPTIONS.map((option) => (
                           <button
@@ -131,13 +172,67 @@ const FilterDrawer = ({
                     ) : (
                       <div className="space-y-6">
                         <Dialog.Title className="text-xl font-semibold text-gray-900 dark:text-white">
-                          Filters
+                          Filtres
                         </Dialog.Title>
 
-                        {/* Categories */}
+                        <div className="border-b border-gray-100 pb-6 dark:border-gray-800">
+                          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                            Fourchette de prix
+                          </h3>
+                          <div className="grid grid-cols-2 gap-3">
+                            <label className="text-xs text-gray-500 dark:text-gray-400">
+                              Minimum
+                              <span className="relative mt-1 block">
+                                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
+                                  &euro;
+                                </span>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  step="0.01"
+                                  inputMode="decimal"
+                                  value={minPrice}
+                                  onChange={(event) => setMinPrice(event.target.value)}
+                                  placeholder="0"
+                                  className="h-11 w-full rounded-xl border border-gray-200 bg-white pl-7 pr-2 text-sm text-gray-900 outline-none focus:border-gray-900 dark:border-gray-700 dark:bg-black dark:text-white"
+                                />
+                              </span>
+                            </label>
+                            <label className="text-xs text-gray-500 dark:text-gray-400">
+                              Maximum
+                              <span className="relative mt-1 block">
+                                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
+                                  &euro;
+                                </span>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  step="0.01"
+                                  inputMode="decimal"
+                                  value={maxPrice}
+                                  onChange={(event) => setMaxPrice(event.target.value)}
+                                  placeholder="5000+"
+                                  className="h-11 w-full rounded-xl border border-gray-200 bg-white pl-7 pr-2 text-sm text-gray-900 outline-none focus:border-gray-900 dark:border-gray-700 dark:bg-black dark:text-white"
+                                />
+                              </span>
+                            </label>
+                          </div>
+                          {priceError && (
+                            <p className="mt-2 text-xs text-red-600">{priceError}</p>
+                          )}
+                          <button
+                            type="button"
+                            onClick={handlePriceApply}
+                            className="mt-4 w-full rounded-xl bg-gray-900 px-4 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                          >
+                            Appliquer le prix
+                          </button>
+                        </div>
+
+                        {/* Catégories */}
                         <div>
                           <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
-                            Categories
+                            Catégories
                           </h3>
                           <div className="space-y-1">
                             <button
@@ -148,7 +243,7 @@ const FilterDrawer = ({
                                   : "hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                               }`}
                             >
-                              <span className="font-medium">All Products</span>
+                              <span className="font-medium">Tous les produits</span>
                               {!selectedCategory && (
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

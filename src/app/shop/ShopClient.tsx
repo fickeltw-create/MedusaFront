@@ -87,11 +87,11 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
   }, [products, searchQuery, selectedCategories, priceRange, sortBy]);
 
   const sortOptions = [
-    { value: 'featured', label: 'Featured' },
-    { value: 'price-low', label: 'Price: Low to High' },
-    { value: 'price-high', label: 'Price: High to Low' },
-    { value: 'name-asc', label: 'Name: A to Z' },
-    { value: 'name-desc', label: 'Name: Z to A' },
+    { value: 'featured', label: 'Recommandé' },
+    { value: 'price-low', label: 'Prix : croissant' },
+    { value: 'price-high', label: 'Prix : décroissant' },
+    { value: 'name-asc', label: 'Nom : A à Z' },
+    { value: 'name-desc', label: 'Nom : Z à A' },
   ];
 
   const clearFilters = () => {
@@ -113,7 +113,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
           <div className="fixed inset-0 bg-black/50" onClick={() => setMobileFiltersOpen(false)} />
           <div className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-white px-4 py-6 shadow-xl">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+              <h2 className="text-lg font-semibold text-gray-900">Filtres</h2>
               <button onClick={() => setMobileFiltersOpen(false)} className="p-2">
                 <X className="h-6 w-6" />
               </button>
@@ -122,7 +122,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
             <div className="mt-6 space-y-8">
               {/* Categories */}
               <div>
-                <h3 className="block text-sm font-medium text-gray-900">Categories</h3>
+                <h3 className="block text-sm font-medium text-gray-900">Catégories</h3>
                 <div className="mt-4 space-y-3">
                   {categories.map(category => (
                     <label key={category} className="flex items-center">
@@ -140,7 +140,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
 
               {/* Price Range */}
               <div>
-                <h3 className="block text-sm font-medium text-gray-900">Price Range</h3>
+                <h3 className="block text-sm font-medium text-gray-900">Fourchette de prix</h3>
                 <div className="mt-4">
                   <div className="flex items-center gap-2">
                     <input
@@ -148,7 +148,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                       value={priceRange[0]}
                       onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                       className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                      placeholder="Min"
+                      placeholder="Minimum"
                     />
                     <span className="text-gray-500">-</span>
                     <input
@@ -156,7 +156,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                       value={priceRange[1]}
                       onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                       className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                      placeholder="Max"
+                      placeholder="Maximum"
                     />
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                 onClick={clearFilters}
                 className="w-full rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
-                Clear all filters
+                Tout réinitialiser
               </button>
             </div>
           </div>
@@ -176,9 +176,9 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
       {/* Hero Section */}
       <div className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Shop</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Boutique</h1>
           <p className="mt-4 max-w-2xl text-xl text-gray-500">
-            Discover our collection of premium products designed for modern life.
+            Découvrez notre collection de produits premium conçus pour la vie moderne.
           </p>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                 className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 lg:hidden"
               >
                 <SlidersHorizontal className="h-4 w-4" />
-                Filters
+                  Filtres
                 {activeFiltersCount > 0 && (
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
                     {activeFiltersCount}
@@ -221,7 +221,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                 onClick={() => setShowSortDropdown(!showSortDropdown)}
                 className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
               >
-                Sort by: {sortOptions.find(o => o.value === sortBy)?.label}
+                Trier par : {sortOptions.find(o => o.value === sortBy)?.label}
                 <ChevronDown className="h-4 w-4" />
               </button>
               {showSortDropdown && (
@@ -251,20 +251,20 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
           <aside className="hidden w-64 flex-shrink-0 lg:block">
             <div className="sticky top-28 space-y-8 rounded-2xl bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-gray-900">Filters</h3>
+                <h3 className="font-semibold text-gray-900">Filtres</h3>
                 {activeFiltersCount > 0 && (
                   <button
                     onClick={clearFilters}
                     className="text-xs text-blue-600 hover:underline"
                   >
-                    Clear all
+                    Tout réinitialiser
                   </button>
                 )}
               </div>
 
               {/* Categories */}
               <div>
-                <h4 className="text-sm font-medium text-gray-900">Categories</h4>
+                <h4 className="text-sm font-medium text-gray-900">Catégories</h4>
                 <div className="mt-3 space-y-2">
                   {categories.map(category => (
                     <label key={category} className="flex cursor-pointer items-center">
@@ -278,14 +278,14 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                     </label>
                   ))}
                   {categories.length === 0 && (
-                    <p className="text-xs text-gray-400">No categories available</p>
+                    <p className="text-xs text-gray-400">Aucune catégorie disponible</p>
                   )}
                 </div>
               </div>
 
               {/* Price Range */}
               <div>
-                <h4 className="text-sm font-medium text-gray-900">Price Range</h4>
+                <h4 className="text-sm font-medium text-gray-900">Fourchette de prix</h4>
                 <div className="mt-3">
                   <div className="flex items-center gap-2">
                     <div className="relative">
@@ -321,19 +321,19 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
           <div className="flex-1">
             {/* Results count */}
             <p className="mb-6 text-sm text-gray-500">
-              Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'produit' : 'produits'}
             </p>
 
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center rounded-2xl bg-white py-16 text-center">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-lg font-semibold text-gray-900">No products found</h3>
-                <p className="mt-2 text-sm text-gray-500">Try adjusting your filters or search query</p>
+                <h3 className="text-lg font-semibold text-gray-900">Aucun produit trouvé</h3>
+                <p className="mt-2 text-sm text-gray-500">Modifiez vos filtres ou votre recherche</p>
                 <button
                   onClick={clearFilters}
                   className="btn-primary mt-4 px-6 py-2"
                 >
-                  Clear filters
+                  Réinitialiser les filtres
                 </button>
               </div>
             ) : (
@@ -359,7 +359,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                       <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
                       <button className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-900 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 hover:bg-gray-100">
                         <ShoppingCart className="h-4 w-4" />
-                        Add to cart
+                        Ajouter au panier
                       </button>
                     </Link>
                     
@@ -378,7 +378,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                       </Link>
                       
                       <p className="mt-2 text-sm text-gray-500 line-clamp-2 flex-1">
-                        {product.description || 'Premium quality product for your everyday needs.'}
+                        {product.description || 'Un produit de qualité pour votre quotidien.'}
                       </p>
                       
                       <div className="mt-4 flex items-center justify-between">
@@ -387,7 +387,7 @@ export default function ShopClient({ products, categories, minPrice, maxPrice }:
                         </p>
                         <button 
                           className="inline-flex items-center justify-center rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-blue-100 hover:text-blue-600"
-                          title="Add to cart"
+                          title="Ajouter au panier"
                         >
                           <ShoppingCart className="h-5 w-5" />
                         </button>

@@ -1,8 +1,9 @@
 import "server-only"
 import { cookies as nextCookies } from "next/headers"
+import type { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies"
 
 const isProduction = process.env.NODE_ENV === "production"
-const crossSiteCookieOptions = {
+const crossSiteCookieOptions: Partial<ResponseCookie> = {
   maxAge: 60 * 60 * 24 * 7,
   httpOnly: true,
   sameSite: isProduction ? "none" : "strict",

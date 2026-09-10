@@ -35,7 +35,7 @@ const apartmentFloorPlan = "/Floor plans/Modura.be 2D MODULE FRAMES 60 M² (4 x 
 // Family House (120m²)
 import family1 from "../Models plans/Maison 120 m²/1.jpg";
 import family2 from "../Models plans/Maison 120 m²/2.jpg";
-import family3 from "../Models plans/Maison 120 m²/3.jpg";
+import family3 from "../Models plans/Maison 120 m²/3.png";
 import family4 from "../Models plans/Maison 120 m²/4.jpg";
 import familyExtra1 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt-image-2-image-1 (2).jpg";
 import familyExtra2 from "../Models plans/Maison 120 m²/Planner5d_AI_Studio_gpt-image-2-image-1 (3).jpg";

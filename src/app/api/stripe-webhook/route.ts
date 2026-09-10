@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { updateReservationStatus } from '@/lib/supabase';
 
 const getStripe = () =>
   new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: '2023-10-16',
+    apiVersion: '2026-06-24.dahlia',
   });
 
 export async function POST(request: Request) {
@@ -27,27 +28,16 @@ export async function POST(request: Request) {
   // Handle the event
   switch (event.type) {
     case 'checkout.session.completed': {
-      const { supabase } = await import('@/lib/supabase');
       const session = event.data.object as Stripe.Checkout.Session;
       
-      // Update reservation in Supabase when payment is completed
+      // Update the matching Neon reservation when payment is completed.
       if (session.metadata?.customerEmail && session.metadata?.houseModel) {
-        const { error } = await supabase
-          .from('reservations')
-          .update({
-            status: 'paid',
-            stripe_session_id: session.id,
-            payment_completed_at: new Date().toISOString(),
-            payment_intent: session.payment_intent,
-          })
-          .eq('email', session.metadata.customerEmail)
-          .eq('model', session.metadata.houseModel)
-          .eq('status', 'pending_payment');
-
-        if (error) {
-          console.error('Error updating reservation:', error);
-          return NextResponse.json({ error: 'Failed to update reservation' }, { status: 500 });
-        }
+        await updateReservationStatus(
+          session.id,
+          'paid',
+          session.metadata.customerEmail,
+          session.metadata.houseModel,
+        );
 
         console.log(`Payment completed for reservation: ${session.metadata.houseModel} - ${session.metadata.customerEmail}`);
       }
@@ -55,20 +45,10 @@ export async function POST(request: Request) {
     }
     
     case 'checkout.session.async_payment_failed': {
-      const { supabase } = await import('@/lib/supabase');
       const session = event.data.object as Stripe.Checkout.Session;
       
       // Mark reservation as payment failed
       if (session.metadata?.customerEmail && session.metadata?.houseModel) {
-        await supabase
-          .from('reservations')
-          .update({
-            status: 'payment_failed',
-            stripe_session_id: session.id,
-          })
-          .eq('email', session.metadata.customerEmail)
-          .eq('model', session.metadata.houseModel);
-          
         console.log(`Payment failed for: ${session.metadata.customerEmail}`);
       }
       break;

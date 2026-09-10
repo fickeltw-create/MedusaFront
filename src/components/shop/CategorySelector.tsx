@@ -14,8 +14,8 @@ const CategorySelector = memo(function CategorySelector({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-slate-900">Categories</h3>
-        <span className="text-xs text-slate-500">{categories.length} available</span>
+        <h3 className="text-sm font-semibold text-slate-900">Catégories</h3>
+        <span className="text-xs text-slate-500">{categories.length} disponibles</span>
       </div>
       <div className="space-y-2">
         {categories.map((category) => {
@@ -34,7 +34,7 @@ const CategorySelector = memo(function CategorySelector({
                 />
                 <span>{category}</span>
               </span>
-              {checked ? <span className="text-xs font-medium text-sky-600">Selected</span> : null}
+              {checked ? <span className="text-xs font-medium text-sky-600">Sélectionné</span> : null}
             </label>
           );
         })}

@@ -14,6 +14,15 @@ type PaginatedProductsParams = {
   order?: string
 }
 
+const parsePrice = (value?: string) => {
+  if (!value?.trim()) {
+    return undefined
+  }
+
+  const parsed = Number(value)
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : undefined
+}
+
 export default async function PaginatedProducts({
   sortBy,
   page,
@@ -21,6 +30,9 @@ export default async function PaginatedProducts({
   categoryId,
   productsIds,
   countryCode,
+  view = "grid",
+  minPrice,
+  maxPrice,
 }: {
   sortBy?: SortOptions
   page: number
@@ -28,25 +40,28 @@ export default async function PaginatedProducts({
   categoryId?: string
   productsIds?: string[]
   countryCode: string
+  view?: "grid" | "list"
+  minPrice?: string
+  maxPrice?: string
 }) {
   const queryParams: PaginatedProductsParams = {
     limit: 12,
   }
 
   if (collectionId) {
-    queryParams["collection_id"] = [collectionId]
+    queryParams.collection_id = [collectionId]
   }
 
   if (categoryId) {
-    queryParams["category_id"] = [categoryId]
+    queryParams.category_id = [categoryId]
   }
 
   if (productsIds) {
-    queryParams["id"] = productsIds
+    queryParams.id = productsIds
   }
 
   if (sortBy === "created_at") {
-    queryParams["order"] = "created_at"
+    queryParams.order = "created_at"
   }
 
   const region = await getRegion(countryCode)
@@ -55,30 +70,31 @@ export default async function PaginatedProducts({
     return null
   }
 
-  let {
+  const {
     response: { products, count },
   } = await listProductsWithSort({
     page,
     queryParams,
     sortBy,
+    minPrice: parsePrice(minPrice),
+    maxPrice: parsePrice(maxPrice),
     countryCode,
   })
 
   const totalPages = Math.ceil(count / PRODUCT_LIMIT)
+  const gridClass =
+    view === "list"
+      ? "grid w-full grid-cols-1 gap-4"
+      : "grid w-full grid-cols-1 gap-x-5 gap-y-7 small:grid-cols-2 medium:grid-cols-3 large:grid-cols-4"
 
   return (
     <>
-      <ul
-        className="grid grid-cols-2 w-full small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8"
-        data-testid="products-list"
-      >
-        {products.map((p) => {
-          return (
-            <li key={p.id}>
-              <ProductPreview product={p} region={region} />
-            </li>
-          )
-        })}
+      <ul className={gridClass} data-testid="products-list">
+        {products.map((product) => (
+          <li key={product.id}>
+            <ProductPreview product={product} region={region} view={view} />
+          </li>
+        ))}
       </ul>
       {totalPages > 1 && (
         <Pagination

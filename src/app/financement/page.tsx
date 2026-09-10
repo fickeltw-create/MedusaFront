@@ -7,7 +7,6 @@ import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice, calculateMonthlyPayment } from '@/lib/houses';
 import { Calculator, TrendingDown, Shield, Check, Loader2, ArrowRight, BadgePercent, BriefcaseBusiness, WalletCards, LineChart } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, AreaChart, Area, PieChart, Pie, Cell } from 'recharts';
-import { supabase } from '@/lib/supabase';
 
 const DURATIONS = [60, 120, 180, 240, 360, 420];
 type Mode = 'credit' | 'investment';
@@ -62,13 +61,18 @@ export default function FinancementPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await supabase.from('leads').insert({
-        type: mode === 'credit' ? 'financing' : 'investment',
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+        type: 'financing',
         name: form.name,
         email: form.email,
         phone: form.phone,
         model: house.slug,
+        }),
       });
+      if (!response.ok) throw new Error('Lead creation failed');
       setSuccess(true);
     } finally {
       setLoading(false);

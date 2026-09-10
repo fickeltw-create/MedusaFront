@@ -28,7 +28,7 @@ const StoreClientWrapper = ({
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [isSortOpen, setIsSortOpen] = useState(false)
 
-  const title = selectedCategory?.name || "All Products"
+  const title = selectedCategory?.name || "Tous les produits"
 
   return (
     <div className="relative">

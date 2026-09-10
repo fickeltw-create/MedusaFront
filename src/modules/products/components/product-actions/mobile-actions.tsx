@@ -18,6 +18,7 @@ type MobileActionsProps = {
   updateOptions: (title: string, value: string) => void
   inStock?: boolean
   handleAddToCart: () => void
+  handleBuyNow: () => void
   isAdding?: boolean
   show: boolean
   optionsDisabled: boolean
@@ -30,6 +31,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   updateOptions,
   inStock,
   handleAddToCart,
+  handleBuyNow,
   isAdding,
   show,
   optionsDisabled,
@@ -111,7 +113,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                   <span>
                     {variant
                       ? Object.values(options).join(" / ")
-                      : "Select Options"}
+                      : "Choisir les options"}
                   </span>
                   <ChevronDown />
                 </div>
@@ -124,10 +126,19 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 data-testid="mobile-cart-button"
               >
                 {!variant
-                  ? "Select variant"
+                  ? "Sélectionner une variante"
                   : !inStock
-                  ? "Out of stock"
-                  : "Add to cart"}
+                  ? "Rupture de stock"
+                  : "Ajouter au panier"}
+              </Button>
+              <Button
+                onClick={handleBuyNow}
+                disabled={!inStock || !variant}
+                variant="secondary"
+                className="w-full"
+                isLoading={isAdding}
+              >
+                Payer maintenant
               </Button>
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, softShadows } from '@react-three/drei';
+import { OrbitControls, SoftShadows } from '@react-three/drei';
 
 export type ExteriorColor = 'white' | 'black' | 'wood' | 'concrete';
 export type RoofType = 'flat' | 'pitched' | 'metal';
@@ -207,8 +207,6 @@ function Box({ position, size, color, opacity = 1, ...props }: { position: numbe
   );
 }
 
-softShadows();
-
 type StudentView = 'overview' | 'entry' | 'bath' | 'kitchen' | 'living' | 'sleep';
 
 const STUDENT_CAMERA_PRESETS: Record<StudentView, { position: [number, number, number]; target: [number, number, number] }> = {
@@ -249,6 +247,7 @@ function StudentHouse3D({ c, roof, hasSolar }: SharedProps) {
   return (
     <div className="relative w-full h-full">
       <Canvas shadows dpr={[1, 2]} camera={{ position: [5.6, 3.4, 4.4], fov: 36 }}>
+        <SoftShadows />
         <color attach="background" args={[ '#E5F0FB' ]} />
         <ambientLight intensity={0.55} />
         <directionalLight

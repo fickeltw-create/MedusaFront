@@ -7,7 +7,6 @@ import type { ExteriorColor, RoofType, ModelKey } from '@/components/HouseViewer
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, CONFIGURATOR_OPTIONS, formatPrice, calculateMonthlyPayment } from '@/lib/houses';
 import { Check, ArrowRight, Loader2, Shield, RotateCcw, Zap, Home, Wind, Palette } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 type EnergyKey = keyof typeof CONFIGURATOR_OPTIONS.energy;
 type ClimateKey = keyof typeof CONFIGURATOR_OPTIONS.climate;
@@ -56,7 +55,12 @@ export default function ConfigurateurPage() {
     e.preventDefault(); setLoading(true);
     try {
       const cfg = `${t.models[house.key].name} | ${exterior} | ${roofType} | ${energies.join(',')} | ${climates.join(',')} | ${formatPrice(total)}`;
-      await supabase.from('leads').insert({ type: 'quote', name: form.name, email: form.email, phone: form.phone, model: house.slug, message: cfg });
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'quote', name: form.name, email: form.email, phone: form.phone, model: house.slug, message: cfg }),
+      });
+      if (!response.ok) throw new Error('Lead creation failed');
       setSuccess(true);
     } finally { setLoading(false); }
   };

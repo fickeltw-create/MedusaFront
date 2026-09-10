@@ -7,7 +7,6 @@ import Footer from '@/components/Footer';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES } from '@/lib/houses';
 import { MapPin, Phone, Mail, Clock, Send, Check, Loader2, MessageCircle, FileText, Users, Wrench } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 type FormType = 'contact' | 'quote' | 'distributor' | 'installer';
 
@@ -58,8 +57,11 @@ function ContactPageContent() {
     setLoading(true);
     setError('');
     try {
-      // 1. Save to Supabase database
-      await supabase.from('leads').insert({
+      // 1. Save to Neon through the server API
+      const leadResponse = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
         type: formType === 'contact' ? 'contact' : formType === 'quote' ? 'quote' : formType === 'distributor' ? 'distributor' : 'installer',
         name: form.name,
         email: form.email,
@@ -68,7 +70,9 @@ function ContactPageContent() {
         model: form.model,
         region: form.region,
         message: form.subject ? `${form.subject}: ${form.message}` : form.message,
+        }),
       });
+      if (!leadResponse.ok) throw new Error('Lead creation failed');
 
       // 2. Send email to info@modura.be
       await fetch('/api/send-email', {

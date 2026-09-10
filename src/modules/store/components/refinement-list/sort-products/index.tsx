@@ -11,15 +11,15 @@ type SortProductsProps = {
 const sortOptions = [
   {
     value: "created_at",
-    label: "Latest Arrivals",
+    label: "Recommandé",
   },
   {
     value: "price_asc",
-    label: "Price: Low → High",
+    label: "Prix : croissant",
   },
   {
     value: "price_desc",
-    label: "Price: High → Low",
+    label: "Prix : décroissant",
   },
 ]
 
@@ -37,7 +37,7 @@ const SortProducts = ({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="txt-compact-small-plus text-ui-fg-muted">Sort By</div>
+      <div className="txt-compact-small-plus text-ui-fg-muted">Trier par</div>
       <div className="flex flex-col gap-3" data-testid={dataTestId}>
         {sortOptions.map((option) => {
           const isActive = option.value === sortBy

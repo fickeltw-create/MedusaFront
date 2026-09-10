@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { CheckCircle2, ChevronLeft } from 'lucide-react';
 import Stripe from 'stripe';
+import { updateReservationStatus } from '@/lib/supabase';
 
 
 export default async function ReservationSuccessPage({
@@ -18,27 +19,19 @@ export default async function ReservationSuccessPage({
     try {
       // Load payment services only when a real checkout session is provided.
       const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-        apiVersion: '2023-10-16',
+        apiVersion: '2026-06-24.dahlia',
       });
       session = await stripe.checkout.sessions.retrieve(sessionId);
       
-      // Update reservation status in Supabase
+      // Update the reservation in Neon after Stripe confirms the payment.
       if (session?.metadata?.houseModel && session?.metadata?.customerEmail) {
-        const { supabase } = await import('@/lib/supabase');
-        const { error } = await supabase
-          .from('reservations')
-          .update({ 
-            status: 'paid',
-            stripe_session_id: sessionId,
-            payment_completed_at: new Date().toISOString()
-          })
-          .eq('email', session.metadata.customerEmail)
-          .eq('model', session.metadata.houseModel)
-          .eq('status', 'pending_payment');
-          
-        if (!error) {
-          reservationUpdated = true;
-        }
+        await updateReservationStatus(
+          sessionId,
+          'paid',
+          session.metadata.customerEmail,
+          session.metadata.houseModel,
+        );
+        reservationUpdated = true;
       }
     } catch (error) {
       console.error('Error retrieving Stripe session:', error);
