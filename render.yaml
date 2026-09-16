@@ -1,0 +1,60 @@
+services:
+  - type: web
+    name: modura-storefront
+    env: node
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.0.0
+      - key: DATABASE_URL
+        sync: false
+      - key: COOKIE_SECRET
+        sync: false
+      - key: DEFAULT_COUNTRY_CODE
+        value: BE
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_USER
+        value: info@modura.be
+      - key: JWT_SECRET
+        sync: false
+      - key: MEDUSA_API_KEY
+        sync: false
+      - key: MEDUSA_BACKEND_URL
+        sync: false
+      - key: MEDUSA_FRONTEND_URL
+        sync: false
+      - key: NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+        sync: false
+      - key: NEXT_PUBLIC_BASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_DEFAULT_REGION
+        value: "be"
+      - key: NEXT_PUBLIC_STRIPE_KEY
+        sync: false
+      - key: NEXT_PUBLIC_MEDUSA_BACKEND_URL
+        sync: false
+      - key: NEXT_PUBLIC_MEDUSA_FRONTEND_URL
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_STORE_URL
+        sync: false
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NODE_ENV
+        value: production
+      - key: NPM_CONFIG_PRODUCTION
+        value: "false"
+      - key: STRIPE_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: REVALIDATE_SECRET
+        generateValue: true
