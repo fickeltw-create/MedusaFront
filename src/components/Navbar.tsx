@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useI18n, Language } from '@/lib/i18n';
@@ -49,10 +50,14 @@ export default function Navbar() {
       <div className="container-wide">
         <div className="flex items-center justify-between h-16 md:h-18">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${isScrolledOrNotHome ? 'bg-[#0F172A]' : 'bg-white/20'}`}>
-              <span className={`font-syne font-bold text-sm ${isScrolledOrNotHome ? 'text-white' : 'text-white'}`}>M</span>
-            </div>
-            <span className={`font-syne font-bold text-xl tracking-tight transition-colors duration-300 ${isScrolledOrNotHome ? 'text-[#0F172A]' : 'text-white'}`}>MODURA</span>
+            <Image
+              src={isScrolledOrNotHome ? "/noir.png" : "/Blanc.png"}
+              alt="MODURA"
+              width={120}
+              height={40}
+              className="h-10 w-auto transition-all duration-300 object-contain"
+              priority
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">

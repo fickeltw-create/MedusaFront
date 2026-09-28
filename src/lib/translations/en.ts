@@ -382,9 +382,9 @@ const en: Translations = {
     },
     info: {
       addressLabel: 'Address',
-      address: 'Belgium',
-      phoneLabel: 'Phone',
-      phone: '+32 (0) 472 72 34 76',
+      address: 'Chaussée De Mons, 778B, 1660 Sint Pieters Leeuw, Belgium',
+      phoneLabel: 'Phones',
+      phone: '+32 470 60 62 26 | CEO: +32 472 72 34 76',
       emailLabel: 'Email',
       email: 'info@modura.be',
       hoursLabel: 'Opening hours',
