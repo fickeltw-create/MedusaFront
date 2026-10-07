@@ -1,3 +1,5 @@
+Replace everything in src/lib/translations/en.ts with this complete code. Use the code block’s Copy button, then commit.
+
 import { Translations } from './fr';
 
 const en: Translations = {
@@ -12,17 +14,17 @@ const en: Translations = {
     contact: 'Contact',
     devis: 'Request a quote',
     promotion: 'Promotions',
-    langFr: 'Français',
+    langFr: 'Fran\u00e7ais',
     langNl: 'Nederlands',
     langEn: 'English',
   },
   hero: {
     headline: 'Your modular home in a few weeks',
     subheadline: 'Modern design, fast delivery, transparent pricing.',
-    subtitle: 'Metal frame house • modern design • fast delivery',
+    subtitle: 'Metal frame house \u2022 modern design \u2022 fast delivery',
     cta1: 'Explore the models',
     cta2: 'Request a quote',
-    badge: 'Delivery 8–12 weeks',
+    badge: 'Delivery 8\u201312 weeks',
   },
   stats: {
     badge: 'About Modura',
@@ -58,7 +60,7 @@ const en: Translations = {
     title: 'Why choose MODURA?',
     subtitle: 'A new way to become a homeowner, simple and accessible.',
     items: [
-      { title: 'Fast Delivery', desc: 'Stock available within 1 week, factory orders in 8–12 weeks.' },
+      { title: 'Fast Delivery', desc: 'Stock available within 1 week, factory orders in 8\u201312 weeks.' },
       { title: 'Affordable Prices', desc: 'Up to 50% cheaper than the traditional market. Financing available.' },
       { title: 'Ecological', desc: 'Sustainable construction, responsible materials, integrated solar options.' },
       { title: 'Modern Manufacturing', desc: 'Factory precision, delivered ready to install on your land.' },
@@ -74,7 +76,7 @@ const en: Translations = {
   },
   catalog: {
     catalogTitle: 'The Modura Catalogue',
-    catalogSubtitle: 'Browse Modura\'s official collection of house models — designed and built for quality and durability.',
+    catalogSubtitle: 'Browse Modura\'s official collection of house models \u2014 designed and built for quality and durability.',
     catalogCta: 'Explore the models',
     ctaTitle: 'Create your custom home',
     ctaSubtitle: 'Configure every detail and visualize in real time.',
@@ -101,7 +103,7 @@ const en: Translations = {
     specs: 'Specifications',
     delivery: 'Delivery',
     stockDelivery: '1 week (stock)',
-    factoryDelivery: '8–12 weeks (on order)',
+    factoryDelivery: '8\u201312 weeks (on order)',
     discount: 'discount',
     marketPriceLabel: 'Market price',
     ourPriceLabel: 'Our price',
@@ -123,19 +125,19 @@ const en: Translations = {
       name: 'Tiny House',
       tagline: 'Own it for less than you\'d rent it',
       features: ['1 bedroom', 'Bathroom', 'Living room', 'Kitchen'],
-      description: 'Compact, smart, and ready to live in. This 40 m² modular home combines modern design with functional living. Whether you\'re a student looking for your first independent space, a young professional wanting to stop paying rent, or an investor seeking high-yield rental property — this home delivers value, quality, and speed. Sustainable steel-frame construction, CE certified, and delivered to your land within weeks.',
+      description: 'Compact, smart, and ready to live in. This 40 m\u00b2 modular home combines modern design with functional living. Whether you\'re a student looking for your first independent space, a young professional wanting to stop paying rent, or an investor seeking high-yield rental property \u2014 this home delivers value, quality, and speed. Sustainable steel-frame construction, CE certified, and delivered to your land within weeks.',
     },
     apartment: {
       name: 'Apartment House',
       tagline: 'The perfect balance between space and budget',
       features: ['2 bedrooms', 'Bathroom', 'Living room', 'Dining room'],
-      description: 'The perfect balance between space and budget. This 60 m² apartment house offers two spacious bedrooms, a functional kitchen, and a smart layout that makes the most of every square meter. Whether you are a young family looking for your first home, a professional wanting to invest in real estate, or someone who simply wants more space without paying top dollar — this home is the ideal solution. Sustainable steel frame, CE certified, and delivered within a few weeks.',
+      description: 'The perfect balance between space and budget. This 60 m\u00b2 apartment house offers two spacious bedrooms, a functional kitchen, and a smart layout that makes the most of every square meter. Whether you are a young family looking for your first home, a professional wanting to invest in real estate, or someone who simply wants more space without paying top dollar \u2014 this home is the ideal solution. Sustainable steel frame, CE certified, and delivered within a few weeks.',
     },
     family: {
       name: 'Family House',
       tagline: 'The space your family deserves',
       features: ['4 bedrooms', '2 bathrooms', 'Large kitchen', 'Generous living areas'],
-      description: 'The space your family deserves. This 120 m² family home offers four spacious bedrooms, two modern bathrooms, and generous living areas designed for quality time together. Whether you are a growing family needing room for everyone, or you simply refuse to compromise on comfort and quality — this home delivers. Built with a durable steel frame, CE certified, and finished to the highest standards. No more renting. No more waiting. Your family\'s future starts here.',
+      description: 'The space your family deserves. This 120 m\u00b2 family home offers four spacious bedrooms, two modern bathrooms, and generous living areas designed for quality time together. Whether you are a growing family needing room for everyone, or you simply refuse to compromise on comfort and quality \u2014 this home delivers. Built with a durable steel frame, CE certified, and finished to the highest standards. No more renting. No more waiting. Your family\'s future starts here.',
     },
     foldable: {
       name: 'Foldable House',
@@ -146,8 +148,8 @@ const en: Translations = {
     capsule: {
       name: 'Space Capsule',
       tagline: 'Unconventional living for the bold',
-      features: ['40 m²', '1 bedroom', 'Steel frame', 'Futuristic design', 'Ideal for nomads', 'Minimalist living'],
-      description: 'Unconventional living for the bold. The Space Capsule is not just a home — it\'s a statement. Designed for those who think differently, this 40 m² modular living space combines futuristic aesthetics with practical functionality. Perfect for digital nomads, minimalists, or as a unique Airbnb investment. Built with a durable steel frame, CE certified, and finished to the highest standards. Stand out from the crowd. Live differently.',
+      features: ['40 m\u00b2', '1 bedroom', 'Steel frame', 'Futuristic design', 'Ideal for nomads', 'Minimalist living'],
+      description: 'Unconventional living for the bold. The Space Capsule is not just a home \u2014 it\'s a statement. Designed for those who think differently, this 40 m\u00b2 modular living space combines futuristic aesthetics with practical functionality. Perfect for digital nomads, minimalists, or as a unique Airbnb investment. Built with a durable steel frame, CE certified, and finished to the highest standards. Stand out from the crowd. Live differently.',
     },
   },
   configurator: {
@@ -169,9 +171,9 @@ const en: Translations = {
     getQuote: 'Get my quote',
     sizeFilters: {
       all: 'All',
-      compact: 'Compact (≤20 m²)',
-      medium: 'Medium (20–60 m²)',
-      large: 'Large (>60 m²)',
+      compact: 'Compact (\u226420 m\u00b2)',
+      medium: 'Medium (20\u201360 m\u00b2)',
+      large: 'Large (>60 m\u00b2)',
     },
     months: 'months',
     perMonth: '/month',
@@ -216,7 +218,7 @@ const en: Translations = {
     reserveText: 'To reserve your home',
     rate: '3.9%',
     maxYears: '35 years',
-    minDepositAmount: '€1,000',
+    minDepositAmount: '\u20ac1,000',
     selectHouse: 'Choose your home',
     deposit: 'Personal deposit',
     duration: 'Financing duration',
@@ -274,8 +276,8 @@ const en: Translations = {
     addToHouse: 'Add to my home',
     learnMore: 'Learn more',
     stats: [
-      { title: 'Annual savings', value: 'up to €2,400', desc: 'With a 10kW solar kit' },
-      { title: 'Return on investment', value: '4–7 years', desc: 'Depending on consumption and sunshine' },
+      { title: 'Annual savings', value: 'up to \u20ac2,400', desc: 'With a 10kW solar kit' },
+      { title: 'Return on investment', value: '4\u20137 years', desc: 'Depending on consumption and sunshine' },
       { title: 'Panel warranty', value: '25 years', desc: '80% performance guarantee' },
     ],
     products: {
@@ -339,7 +341,7 @@ const en: Translations = {
       },
       {
         q: 'How does financing work?',
-        a: 'We offer flexible financing over 120 or 420 months. A deposit of €1,000 is required to reserve your home.',
+        a: 'We offer flexible financing over 120 or 420 months. A deposit of \u20ac1,000 is required to reserve your home.',
       },
       {
         q: 'What does the warranty cover?',
@@ -382,17 +384,17 @@ const en: Translations = {
     },
     info: {
       addressLabel: 'Address',
-      address: 'Chaussée De Mons, 778B, 1660 Sint Pieters Leeuw, Belgium',
+      address: 'Chauss\u00e9e De Mons, 778B, 1660 Sint Pieters Leeuw, Belgium',
       phoneLabel: 'Phones',
       phone: [
-        'CEO — +32 472 72 34 76',
-        'Architecture & Technical — Dirk — +32 472 41 23 40',
-        'Engineer — André — +32 470 57 60 03',
+        'CEO \u2014 +32 472 72 34 76',
+        'Architecture & Technical \u2014 Dirk \u2014 +32 472 41 23 40',
+        'Engineer \u2014 Andr\u00e9 \u2014 +32 470 57 60 03',
       ],
       emailLabel: 'Email',
       email: 'info@modura.be',
       hoursLabel: 'Opening hours',
-      hours: 'Mon–Fri: 9am–6pm',
+      hours: 'Mon\u2013Fri: 9am\u20136pm',
     },
   },
   distributeurs: {
@@ -432,8 +434,8 @@ const en: Translations = {
   },
   cta: {
     title: 'Ready to become a homeowner?',
-    subtitle: 'Reserve your home today with a deposit of €1,000.',
-    reserve: 'Reserve for €1,000',
+    subtitle: 'Reserve your home today with a deposit of \u20ac1,000.',
+    reserve: 'Reserve for \u20ac1,000',
     quote: 'Request a free quote',
   },
   footer: {
@@ -493,12 +495,12 @@ const en: Translations = {
       {
         name: 'Sophie Lecomte',
         role: 'Student, Brussels',
-        text: 'I bought the student house for my studies and it\'s the best decision of my life. Paying €300/month instead of rent is revolutionary!',
+        text: 'I bought the student house for my studies and it\'s the best decision of my life. Paying \u20ac300/month instead of rent is revolutionary!',
         rating: 5,
       },
       {
         name: 'Marc Dubois',
-        role: 'Investor, Liège',
+        role: 'Investor, Li\u00e8ge',
         text: 'I ordered 3 tiny houses for seasonal rental. The quality is impeccable and deadlines were met. Excellent ROI.',
         rating: 5,
       },
@@ -535,10 +537,10 @@ const en: Translations = {
     },
     reservation: {
       title: 'Reserve your home',
-      subtitle: 'Reserve your home with a €1,000 deposit.',
+      subtitle: 'Reserve your home with a \u20ac1,000 deposit.',
       secure: 'Secure payment via Stripe',
       deposit: 'Reservation deposit',
-      amount: '€ 1,000',
+      amount: '\u20ac 1,000',
       pay: 'Pay the deposit',
     },
   },
@@ -550,9 +552,9 @@ const en: Translations = {
     ctaDescription: 'Our advisors are available to answer all your questions and support you in your project.',
     home: 'Home',
     promotions: 'Promotions',
-    promotionStudentHousing: 'Promotion — Student Housing',
+    promotionStudentHousing: 'Promotion \u2014 Student Housing',
     heroHeadline: 'Own it for less than you\'d rent it.',
-    heroDescriptionDetail: 'A 15 m² certified steel-frame home for students, first-time buyers and Airbnb hosts. Delivered in 8 to 12 weeks.',
+    heroDescriptionDetail: 'A 15 m\u00b2 certified steel-frame home for students, first-time buyers and Airbnb hosts. Delivered in 8 to 12 weeks.',
     viewFinancing: 'View financing',
     seeTheHouse: 'See the house',
     size: 'Size',
@@ -565,7 +567,7 @@ const en: Translations = {
     certification: 'Certification',
     certificationValue: 'CE Certified',
     deliveryLabel: 'Delivery',
-    squareMeters: 'm²',
+    squareMeters: 'm\u00b2',
     oneWeek: '1 week',
     weeks: 'weeks',
     houseDescription: 'A compact and modern student house, designed to optimize every square meter. Ideal for students or as a rental investment. Sustainable construction and fast delivery.',
@@ -573,7 +575,7 @@ const en: Translations = {
     howItWorks: 'How it works',
     processDescription: 'A simplified process to make your project accessible and stress-free.',
     reserve: 'Reserve',
-    reserveDesc: 'Pay the €1,000 deposit to secure your home.',
+    reserveDesc: 'Pay the \u20ac1,000 deposit to secure your home.',
     prepare: 'Prepare',
     prepareDesc: 'Set up your land and necessary connections.',
     deliver: 'Delivery',
@@ -592,7 +594,7 @@ const en: Translations = {
     readyToLive: 'Ready to live in',
     bookNow: 'Reserve now',
     requestQuote: 'Request a quote',
-    depositToReserve: '€1,000 deposit to reserve',
+    depositToReserve: '\u20ac1,000 deposit to reserve',
     financing: 'Financing',
     accessibleMonthlyPayments: 'Accessible monthly payments',
     financingDescription: 'Finance your home with conditions adapted to your budget.',
