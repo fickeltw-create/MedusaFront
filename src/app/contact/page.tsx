@@ -235,7 +235,7 @@ function ContactPageContent() {
 
             <div className="rounded-2xl overflow-hidden border border-gray-100 h-52 bg-gray-100 relative">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1257680.9399745456!2d3.0609868729498657!3d50.503887!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c17d64b48c8e4d%3A0x108ffc98bb91b2ce!2sBelgium!5e0!3m2!1sen!2sbe!4v1704000000000!5m2!1sen!2sbe"
+                                src="https://www.google.com/maps?q=Chauss%C3%A9e%20de%20Mons%20778B%2C%20Sint-Pieters-Leeuw%2C%20Belgium&output=embed"
                 className="w-full h-full"
                 style={{ border: 0 }}
                 allowFullScreen
