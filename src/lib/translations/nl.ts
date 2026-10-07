@@ -17,7 +17,7 @@ const nl: Translations = {
     langEn: 'English',
   },
   hero: {
-    headline: 'Uw modulaire woning in enkele weken',
+    headline: 'Uw betaalbare, innovatieve en ecologische woning in enkele weken',
     subheadline: 'Modern design, snelle levering, transparante prijzen.',
     subtitle: 'Metalen frame woning \u2022 modern design \u2022 snelle levering',
     cta1: 'Ontdek de modellen',
