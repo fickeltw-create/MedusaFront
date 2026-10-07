@@ -334,7 +334,7 @@ const fr: Translations = {
     langEn: 'English',
   },
   hero: {
-    headline: 'Votre maison modulaire en quelques semaines',
+    headline: 'Votre maison abordable, innovante et \u00e9cologique en quelques semaines',
     subheadline: 'Design moderne, livraison rapide, prix transparents.',
     subtitle: 'Maison \u00e0 ossature m\u00e9tallique \u2022 design moderne \u2022 livraison rapide',
     cta1: 'D\u00e9couvrir les mod\u00e8les',
