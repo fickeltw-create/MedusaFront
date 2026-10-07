@@ -4,6 +4,7 @@ import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
+import { Clock } from "lucide-react"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -30,7 +31,7 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
   const searchParams = useSearchParams()
   const countryCode = useParams().countryCode as string
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
-  const [quantity, setQuantité] = useState(1)
+  const [quantity, setQuantitÃ©] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
   const [addError, setAddError] = useState<string | null>(null)
   const actionsRef = useRef<HTMLDivElement>(null)
@@ -97,12 +98,12 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
     <div className="flex flex-col gap-6" ref={actionsRef}>
 
       <p className="max-w-2xl whitespace-pre-line text-sm leading-6 text-ui-fg-subtle">
-        {product.description || "Un produit soigneusement sélectionné pour votre maison modulaire."}
+        {product.description || "Un produit soigneusement sÃ©lectionnÃ© pour votre maison modulaire."}
       </p>
       <ProductPrice product={product} variant={selectedVariant} />
-      <div className="flex items-center gap-2 text-sm text-green-700">
-        <span className="h-2 w-2 rounded-full bg-green-600" />
-        {selectedVariant ? (inStock ? "En stock" : "Précommande") : "Sélectionnez une option"}
+      <div className="flex items-center gap-2 text-sm text-orange-700">
+        <Clock size={16} aria-hidden="true" />
+        {selectedVariant ? "Sur commande" : "S\u00e9lectionnez une option"}
       </div>
 
 
@@ -123,11 +124,11 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
       )}
 
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-ui-fg-base">Quantité</span>
+        <span className="text-sm font-medium text-ui-fg-base">QuantitÃ©</span>
         <div className="flex items-center border border-ui-border-base">
-          <button type="button" className="h-10 w-10 text-lg disabled:cursor-not-allowed disabled:text-ui-fg-muted" onClick={() => setQuantité((value) => Math.max(1, value - 1))} disabled={!canDecrease || isAdding} aria-label="Diminuer la quantité">-</button>
+          <button type="button" className="h-10 w-10 text-lg disabled:cursor-not-allowed disabled:text-ui-fg-muted" onClick={() => setQuantitÃ©((value) => Math.max(1, value - 1))} disabled={!canDecrease || isAdding} aria-label="Diminuer la quantitÃ©">-</button>
           <span className="flex h-10 w-10 items-center justify-center border-x border-ui-border-base text-sm">{quantity}</span>
-          <button type="button" className="h-10 w-10 text-lg" onClick={() => setQuantité((value) => Math.min(1000, value + 1))} disabled={isAdding || quantity >= 1000} aria-label="Augmenter la quantité">+</button>
+          <button type="button" className="h-10 w-10 text-lg" onClick={() => setQuantitÃ©((value) => Math.min(1000, value + 1))} disabled={isAdding || quantity >= 1000} aria-label="Augmenter la quantitÃ©">+</button>
         </div>
       </div>
       {addError && <p className="text-sm text-red-600">{addError}</p>}
@@ -140,7 +141,7 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
         isLoading={isAdding}
         data-testid="add-product-button"
       >
-        {!selectedVariant ? "Sélectionnez une option" : !inStock || !isValidVariant ? "Rupture de stock" : "Ajouter au panier"}
+        {!selectedVariant ? "SÃ©lectionnez une option" : !inStock || !isValidVariant ? "Rupture de stock" : "Ajouter au panier"}
       </Button>
 
       <Button
