@@ -1,3 +1,5 @@
+Dans ce fichier GitHub, remplace tout par ce code. Copie uniquement le bloc, puis Commit changes.
+
 "use client"
 
 import { addToCart } from "@lib/data/cart"
@@ -18,20 +20,30 @@ type ProductActionsProps = {
   disabled?: boolean
 }
 
-const optionsAsKeymap = (variantOptions: HttpTypes.StoreProductVariant["options"]) => {
-  return variantOptions?.reduce((acc: Record<string, string>, varopt: any) => {
-    acc[varopt.option_id] = varopt.value
-    return acc
-  }, {})
+const optionsAsKeymap = (
+  variantOptions: HttpTypes.StoreProductVariant["options"]
+) => {
+  return variantOptions?.reduce(
+    (acc: Record<string, string>, varopt: any) => {
+      acc[varopt.option_id] = varopt.value
+      return acc
+    },
+    {}
+  )
 }
 
-export default function ProductActions({ product, disabled }: ProductActionsProps) {
+export default function ProductActions({
+  product,
+  disabled,
+}: ProductActionsProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const countryCode = useParams().countryCode as string
-  const [options, setOptions] = useState<Record<string, string | undefined>>({})
-  const [quantity, setQuantitÃ©] = useState(1)
+  const [options, setOptions] = useState<
+    Record<string, string | undefined>
+  >({})
+  const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
   const [addError, setAddError] = useState<string | null>(null)
   const actionsRef = useRef<HTMLDivElement>(null)
@@ -45,14 +57,22 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
 
   const selectedVariant = useMemo(() => {
     if (!product.variants?.length) return
-    return product.variants.find((variant) => isEqual(optionsAsKeymap(variant.options), options))
+    return product.variants.find((variant) =>
+      isEqual(optionsAsKeymap(variant.options), options)
+    )
   }, [product.variants, options])
 
   const setOptionValue = (optionId: string, value: string) => {
     setOptions((previous) => ({ ...previous, [optionId]: value }))
   }
 
-  const isValidVariant = useMemo(() => product.variants?.some((variant) => isEqual(optionsAsKeymap(variant.options), options)), [product.variants, options])
+  const isValidVariant = useMemo(
+    () =>
+      product.variants?.some((variant) =>
+        isEqual(optionsAsKeymap(variant.options), options)
+      ),
+    [product.variants, options]
+  )
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString())
@@ -60,7 +80,9 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
     if (params.get("v_id") === value) return
     if (value) params.set("v_id", value)
     else params.delete("v_id")
-    router.replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`)
+    router.replace(
+      `${pathname}${params.toString() ? `?${params.toString()}` : ""}`
+    )
   }, [selectedVariant, isValidVariant, pathname, router, searchParams])
 
   const inStock = Boolean(selectedVariant)
@@ -70,10 +92,18 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
     setIsAdding(true)
     setAddError(null)
     try {
-      await addToCart({ variantId: selectedVariant.id, quantity, countryCode })
+      await addToCart({
+        variantId: selectedVariant.id,
+        quantity,
+        countryCode,
+      })
       router.refresh()
     } catch (error) {
-      setAddError(error instanceof Error ? error.message : "Impossible d'ajouter le produit au panier")
+      setAddError(
+        error instanceof Error
+          ? error.message
+          : "Impossible d'ajouter le produit au panier"
+      )
     } finally {
       setIsAdding(false)
     }
@@ -84,10 +114,18 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
     setIsAdding(true)
     setAddError(null)
     try {
-      await addToCart({ variantId: selectedVariant.id, quantity, countryCode })
+      await addToCart({
+        variantId: selectedVariant.id,
+        quantity,
+        countryCode,
+      })
       router.push(`/${countryCode}/checkout?step=address`)
     } catch (error) {
-      setAddError(error instanceof Error ? error.message : "Impossible d'ajouter le produit au panier")
+      setAddError(
+        error instanceof Error
+          ? error.message
+          : "Impossible d'ajouter le produit au panier"
+      )
       setIsAdding(false)
     }
   }
@@ -96,16 +134,19 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
 
   return (
     <div className="flex flex-col gap-6" ref={actionsRef}>
-
       <p className="max-w-2xl whitespace-pre-line text-sm leading-6 text-ui-fg-subtle">
-        {product.description || "Un produit soigneusement sÃ©lectionnÃ© pour votre maison modulaire."}
+        {product.description ||
+          "Un produit soigneusement s\u00e9lectionn\u00e9 pour votre maison modulaire."}
       </p>
+
       <ProductPrice product={product} variant={selectedVariant} />
+
       <div className="flex items-center gap-2 text-sm text-orange-700">
         <Clock size={16} aria-hidden="true" />
-        {selectedVariant ? "Sur commande" : "S\u00e9lectionnez une option"}
+        {selectedVariant
+          ? "Sur commande"
+          : "S\u00e9lectionnez une option"}
       </div>
-
 
       {(product.variants?.length ?? 0) > 1 && (
         <div className="flex flex-col gap-5 border-t border-ui-border-base pt-5">
@@ -124,29 +165,72 @@ export default function ProductActions({ product, disabled }: ProductActionsProp
       )}
 
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-ui-fg-base">QuantitÃ©</span>
+        <span className="text-sm font-medium text-ui-fg-base">
+          {"Quantit\u00e9"}
+        </span>
         <div className="flex items-center border border-ui-border-base">
-          <button type="button" className="h-10 w-10 text-lg disabled:cursor-not-allowed disabled:text-ui-fg-muted" onClick={() => setQuantitÃ©((value) => Math.max(1, value - 1))} disabled={!canDecrease || isAdding} aria-label="Diminuer la quantitÃ©">-</button>
-          <span className="flex h-10 w-10 items-center justify-center border-x border-ui-border-base text-sm">{quantity}</span>
-          <button type="button" className="h-10 w-10 text-lg" onClick={() => setQuantitÃ©((value) => Math.min(1000, value + 1))} disabled={isAdding || quantity >= 1000} aria-label="Augmenter la quantitÃ©">+</button>
+          <button
+            type="button"
+            className="h-10 w-10 text-lg disabled:cursor-not-allowed disabled:text-ui-fg-muted"
+            onClick={() =>
+              setQuantity((value) => Math.max(1, value - 1))
+            }
+            disabled={!canDecrease || isAdding}
+            aria-label={"Diminuer la quantit\u00e9"}
+          >
+            -
+          </button>
+          <span className="flex h-10 w-10 items-center justify-center border-x border-ui-border-base text-sm">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            className="h-10 w-10 text-lg"
+            onClick={() =>
+              setQuantity((value) => Math.min(1000, value + 1))
+            }
+            disabled={isAdding || quantity >= 1000}
+            aria-label={"Augmenter la quantit\u00e9"}
+          >
+            +
+          </button>
         </div>
       </div>
-      {addError && <p className="text-sm text-red-600">{addError}</p>}
+
+      {addError && (
+        <p className="text-sm text-red-600">{addError}</p>
+      )}
 
       <Button
         onClick={handleAddToCart}
-        disabled={!inStock || !selectedVariant || !!disabled || isAdding || !isValidVariant}
+        disabled={
+          !inStock ||
+          !selectedVariant ||
+          !!disabled ||
+          isAdding ||
+          !isValidVariant
+        }
         variant="primary"
         className="h-12 w-full rounded-md text-sm font-medium"
         isLoading={isAdding}
         data-testid="add-product-button"
       >
-        {!selectedVariant ? "SÃ©lectionnez une option" : !inStock || !isValidVariant ? "Rupture de stock" : "Ajouter au panier"}
+        {!selectedVariant
+          ? "S\u00e9lectionnez une option"
+          : !inStock || !isValidVariant
+            ? "Rupture de stock"
+            : "Ajouter au panier"}
       </Button>
 
       <Button
         onClick={handleBuyNow}
-        disabled={!inStock || !selectedVariant || !!disabled || isAdding || !isValidVariant}
+        disabled={
+          !inStock ||
+          !selectedVariant ||
+          !!disabled ||
+          isAdding ||
+          !isValidVariant
+        }
         variant="secondary"
         className="h-12 w-full rounded-md text-sm font-medium"
         isLoading={isAdding}
