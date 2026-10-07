@@ -1,5 +1,3 @@
-Dans ce fichier GitHub, remplace tout par ce code. Copie uniquement le bloc, puis Commit changes.
-
 "use client"
 
 import { addToCart } from "@lib/data/cart"
