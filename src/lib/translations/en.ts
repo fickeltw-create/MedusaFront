@@ -19,7 +19,7 @@ const en: Translations = {
     langEn: 'English',
   },
   hero: {
-    headline: 'Your modular home in a few weeks',
+    headline: 'Your affordable, innovative and eco-friendly home in a few weeks',
     subheadline: 'Modern design, fast delivery, transparent pricing.',
     subtitle: 'Metal frame house \u2022 modern design \u2022 fast delivery',
     cta1: 'Explore the models',
