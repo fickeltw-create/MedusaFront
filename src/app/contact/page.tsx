@@ -136,7 +136,17 @@ function ContactPageContent() {
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{item.label}</p>
-                      <p className="text-sm font-semibold text-[#0F172A]">{item.value}</p>
+                      {Array.isArray(item.value) ? (
+                        <div className="space-y-1">
+                          {item.value.map((line) => (
+                            <p key={line} className="text-sm font-semibold text-[#0F172A]">
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm font-semibold text-[#0F172A]">{item.value}</p>
+                      )}
                     </div>
                   </div>
                 );
@@ -159,7 +169,7 @@ function ContactPageContent() {
             <div className="mt-5 bg-[#F8FAFC] rounded-2xl p-5 border border-gray-100">
               <p className="font-semibold text-sm text-[#0F172A] mb-3">Zones de livraison</p>
               <div className="flex flex-wrap gap-2">
-                {['🇧🇪 Belgique', '🇫🇷 France', '🇳🇱 Pays-Bas'].map((country) => (
+                {['ðŸ‡§ðŸ‡ª Belgique', 'ðŸ‡«ðŸ‡· France', 'ðŸ‡³ðŸ‡± Pays-Bas'].map((country) => (
                   <span key={country} className="label-badge bg-blue-50 text-[#2563EB] text-xs">{country}</span>
                 ))}
               </div>
@@ -253,7 +263,7 @@ function ContactPageContent() {
                           value={form.company}
                           onChange={(e) => setForm({ ...form, company: e.target.value })}
                           className="w-full border border-gray-200 bg-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
-                          placeholder="Votre société"
+                          placeholder="Votre sociÃ©tÃ©"
                         />
                       </div>
                     )}
@@ -266,12 +276,12 @@ function ContactPageContent() {
                           className="w-full border border-gray-200 bg-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
                         >
                           <option value="">{t.forms.quote.model}</option>
-                          <option value="maison-etudiante">Maison Étudiante (15 m²)</option>
-                          <option value="tiny-house">Tiny House (40 m²)</option>
-                          <option value="maison-appartement">Maison Appartement (60 m²)</option>
-                          <option value="maison-familiale">Maison Familiale (120 m²)</option>
-                          <option value="maison-depliable">Maison Dépliable (40 m²)</option>
-                          <option value="space-capsule">Space Capsule (40 m²)</option>
+                          <option value="maison-etudiante">Maison Ã‰tudiante (15 mÂ²)</option>
+                          <option value="tiny-house">Tiny House (40 mÂ²)</option>
+                          <option value="maison-appartement">Maison Appartement (60 mÂ²)</option>
+                          <option value="maison-familiale">Maison Familiale (120 mÂ²)</option>
+                          <option value="maison-depliable">Maison DÃ©pliable (40 mÂ²)</option>
+                          <option value="space-capsule">Space Capsule (40 mÂ²)</option>
                         </select>
                       </div>
                     )}
