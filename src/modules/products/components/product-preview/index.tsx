@@ -1,4 +1,5 @@
 import { Text } from "@medusajs/ui"
+import { Clock } from "lucide-react"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -53,14 +54,9 @@ export default async function ProductPreview({
                 <PreviewPrice price={cheapestPrice} />
               </div>
             )}
-            <span
-              className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${
-                inStock
-                  ? "bg-green-50 text-green-700"
-                  : "bg-orange-50 text-orange-700"
-              }`}
-            >
-              {inStock ? "En stock" : "Précommande"}
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-orange-50 px-2.5 py-1 text-xs font-medium text-orange-700">
+              <Clock size={12} aria-hidden="true" />
+              Sur commande
             </span>
           </div>
         </div>
