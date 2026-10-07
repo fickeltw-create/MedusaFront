@@ -1,5 +1,3 @@
-Replace everything in src/lib/translations/en.ts with this complete code. Use the code block’s Copy button, then commit.
-
 import { Translations } from './fr';
 
 const en: Translations = {
