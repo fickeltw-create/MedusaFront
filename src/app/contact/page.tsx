@@ -137,7 +137,7 @@ function ContactPageContent() {
                     <div>
                       <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{item.label}</p>
                       {Array.isArray(item.value) ? (
-                        <div className="space-y-1">
+                                                <div className="space-y-3">
                           {item.value.map((line) => (
                             <p key={line} className="text-sm font-semibold text-[#0F172A]">
                               {line}
