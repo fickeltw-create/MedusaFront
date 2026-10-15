@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VirtualTour from '@/components/VirtualTour';
 import { ExteriorColor, RoofType } from '@/components/HouseViewer';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice } from '@/lib/houses';
@@ -223,6 +224,12 @@ export default function HouseDetailPage({ params }: { params: Promise<{ slug: st
 
           </div>
         </div>
+
+        {house.virtualTourUrl && (
+          <div className="mt-12">
+            <VirtualTour key={house.slug} url={house.virtualTourUrl} name={model.name} />
+          </div>
+        )}
 
         {/* Related */}
         <div className="mt-20 pt-12 border-t border-gray-100">

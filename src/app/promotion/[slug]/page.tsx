@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import VirtualTour from '@/components/VirtualTour';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice } from '@/lib/houses';
 import { ArrowRight } from 'lucide-react';
@@ -259,6 +260,12 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white font-mono text-sm">
             {currentImageIndex + 1} / {house.images.length}
           </div>
+        </div>
+      )}
+
+      {house.virtualTourUrl && (
+        <div className="max-w-[1180px] mx-auto px-8 py-12">
+          <VirtualTour key={house.slug} url={house.virtualTourUrl} name={model.name} />
         </div>
       )}
 

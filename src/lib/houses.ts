@@ -69,6 +69,7 @@ export interface HouseModel {
   deliveryStockWeeks: number;
   deliveryFactory: string;
   youtubeId?: string;
+  virtualTourUrl?: string;
   image: string;
   images: string[];
   badge?: string;
@@ -120,6 +121,7 @@ export const HOUSES: HouseModel[] = [
     deliveryStockWeeks: 1,
     deliveryFactory: '8–12 semaines',
     youtubeId: 'KLYpZF5pYXY',
+    virtualTourUrl: 'https://www.kujiale.com/cloud/design/3FO3HFC5TAVC/show',
     image: tiny1.src,
     images: [
       tiny1.src,
