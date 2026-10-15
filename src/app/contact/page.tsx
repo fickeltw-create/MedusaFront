@@ -23,7 +23,12 @@ type FormType = 'contact' | 'quote' | 'distributor' | 'installer';
 
 function ContactPageContent() {
   const searchParams = useSearchParams();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const pageCopy = {
+    fr: { delivery: "Zones de livraison", countries: ["🇧🇪 Belgique", "🇫🇷 France", "🇳🇱 Pays-Bas"], company: "Votre société", models: ["Maison Étudiante", "Tiny House", "Maison Appartement", "Maison Familiale", "Maison Dépliable", "Space Capsule"] },
+    nl: { delivery: "Leveringsgebieden", countries: ["🇧🇪 België", "🇫🇷 Frankrijk", "🇳🇱 Nederland"], company: "Uw bedrijf", models: ["Studentenwoning", "Tiny House", "Appartementwoning", "Gezinswoning", "Uitklapbare woning", "Space Capsule"] },
+    en: { delivery: "Delivery areas", countries: ["🇧🇪 Belgium", "🇫🇷 France", "🇳🇱 Netherlands"], company: "Your company", models: ["Student House", "Tiny House", "Apartment House", "Family House", "Foldable House", "Space Capsule"] },
+  }[lang];
 
   const FORM_TYPES: {
     key: FormType;
@@ -246,14 +251,10 @@ function ContactPageContent() {
 
             <div className="mt-5 bg-[#F8FAFC] rounded-2xl p-5 border border-gray-100">
               <p className="font-semibold text-sm text-[#0F172A] mb-3">
-                Zones de livraison
+                {pageCopy.delivery}
               </p>
               <div className="flex flex-wrap gap-2">
-                {[
-                  '\ud83c\udde7\ud83c\uddea Belgique',
-                  '\ud83c\uddeb\ud83c\uddf7 France',
-                  '\ud83c\uddf3\ud83c\uddf1 Pays-Bas',
-                ].map((country) => (
+                {pageCopy.countries.map((country) => (
                   <span
                     key={country}
                     className="label-badge bg-blue-50 text-[#2563EB] text-xs"
@@ -408,7 +409,7 @@ function ContactPageContent() {
                             setForm({ ...form, company: e.target.value })
                           }
                           className="w-full border border-gray-200 bg-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
-                          placeholder={'Votre soci\u00e9t\u00e9'}
+                          placeholder={pageCopy.company}
                         />
                       </div>
                     )}
@@ -427,22 +428,22 @@ function ContactPageContent() {
                         >
                           <option value="">{t.forms.quote.model}</option>
                           <option value="maison-etudiante">
-                            {'Maison \u00c9tudiante (15 m\u00b2)'}
+                            {pageCopy.models[0]} (15 m²)
                           </option>
                           <option value="tiny-house">
-                            {'Tiny House (40 m\u00b2)'}
+                            {pageCopy.models[1]} (40 m²)
                           </option>
                           <option value="maison-appartement">
-                            {'Maison Appartement (60 m\u00b2)'}
+                            {pageCopy.models[2]} (60 m²)
                           </option>
                           <option value="maison-familiale">
-                            {'Maison Familiale (120 m\u00b2)'}
+                            {pageCopy.models[3]} (120 m²)
                           </option>
                           <option value="maison-depliable">
-                            {'Maison D\u00e9pliable (40 m\u00b2)'}
+                            {pageCopy.models[4]} (40 m²)
                           </option>
                           <option value="space-capsule">
-                            {'Space Capsule (40 m\u00b2)'}
+                            {pageCopy.models[5]} (40 m²)
                           </option>
                         </select>
                       </div>

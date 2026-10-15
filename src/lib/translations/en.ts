@@ -385,9 +385,9 @@ const en: Translations = {
       address: 'Chauss\u00e9e De Mons, 778B, 1660 Sint Pieters Leeuw, Belgium',
       phoneLabel: 'Phones',
       phone: [
-        'CEO \u2014 +32 472 72 34 76',
-        'Architecture & Technical \u2014 Dirk \u2014 +32 472 41 23 40',
-        'Engineer \u2014 Andr\u00e9 \u2014 +32 470 57 60 03',
+        "CEO :\n+32 472 72 34 76",
+        "Architecture & Technical :\n+32 472 41 23 40",
+        "Engineer :\n+32 470 57 60 03",
       ],
       emailLabel: 'Email',
       email: 'info@modura.be',
