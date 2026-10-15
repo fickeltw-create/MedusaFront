@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import HouseTourGallery from '@/components/HouseTourGallery';
 import { ExteriorColor, RoofType } from '@/components/HouseViewer';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice } from '@/lib/houses';
@@ -70,6 +71,10 @@ export default function HouseDetailPage({ params }: { params: Promise<{ slug: st
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* ── Left: Photos (static) ── */}
           <div>
+            {house.virtualTourUrl ? (
+              <HouseTourGallery key={house.slug} images={house.images} tourUrl={house.virtualTourUrl} name={model.name} />
+            ) : (
+              <>
             <div
               onClick={() => openLightbox(photoIndex)}
               className="relative w-full rounded-2xl overflow-hidden group aspect-[4/3] shadow-premium cursor-zoom-in"
@@ -115,6 +120,8 @@ export default function HouseDetailPage({ params }: { params: Promise<{ slug: st
                 </a>
               )}
             </div>
+              </>
+            )}
             {/* Quick config CTA */}
           </div>
 
