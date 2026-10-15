@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import VirtualTour from '@/components/VirtualTour';
+import HouseTourGallery from '@/components/HouseTourGallery';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice } from '@/lib/houses';
 import { ArrowRight } from 'lucide-react';
@@ -132,6 +132,10 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
       <section id="space" className="py-24">
         <div className="max-w-[1180px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-[72px] items-start">
           <div className="relative">
+            {house.virtualTourUrl ? (
+              <HouseTourGallery key={house.slug} images={house.images} tourUrl={house.virtualTourUrl} name={model.name} />
+            ) : (
+              <>
             {/* Main Image Carousel */}
             <div className="relative overflow-hidden rounded-sm">
               <span className="absolute top-5 left-5 z-10 bg-[#FCFBF8] px-3 py-2 font-mono text-[11px] uppercase tracking-wider">
@@ -181,6 +185,8 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
                 </button>
               ))}
             </div>
+              </>
+            )}
           </div>
           <div>
             <div className="pt-2">
@@ -260,12 +266,6 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white font-mono text-sm">
             {currentImageIndex + 1} / {house.images.length}
           </div>
-        </div>
-      )}
-
-      {house.virtualTourUrl && (
-        <div className="max-w-[1180px] mx-auto px-8 py-12">
-          <VirtualTour key={house.slug} url={house.virtualTourUrl} name={model.name} />
         </div>
       )}
 
