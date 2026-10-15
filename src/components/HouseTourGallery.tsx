@@ -26,8 +26,8 @@ export default function HouseTourGallery({ images, tourUrl, name }: { images: st
   }
 
   return (
-    <div>
-      <div ref={viewer} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[#F8FAFC] shadow-premium">
+    <div className="w-full min-w-0 max-w-full">
+      <div ref={viewer} className="relative aspect-[4/3] w-full min-w-0 max-w-full overflow-hidden rounded-2xl bg-[#F8FAFC] shadow-premium">
         {active.kind === 'tour' ? (
           <iframe
             src={active.src}
@@ -35,7 +35,7 @@ export default function HouseTourGallery({ images, tourUrl, name }: { images: st
             allow="fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
             allowFullScreen
             sandbox="allow-scripts allow-same-origin allow-pointer-lock"
-            className="block h-full w-full border-0"
+            className="absolute inset-0 block h-full w-full max-w-full border-0"
           />
         ) : (
           <button type="button" onClick={fullscreen} aria-label={copy.fullscreen} className="block h-full w-full cursor-zoom-in">
@@ -43,13 +43,13 @@ export default function HouseTourGallery({ images, tourUrl, name }: { images: st
           </button>
         )}
       </div>
-      <div className="mt-2 flex items-center justify-between gap-2">
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
         <button type="button" onClick={() => setIndex(i => (i - 1 + items.length) % items.length)} aria-label={copy.previous} className="rounded-lg border p-3 hover:bg-gray-50"><ChevronLeft size={18} /></button>
         <span className="text-sm text-gray-600" aria-live="polite">{index + 1} / {items.length}{active.kind === 'tour' ? ' · ' + copy.tour : ''}</span>
         <button type="button" onClick={fullscreen} aria-label={copy.fullscreen} className="rounded-lg border p-3 hover:bg-gray-50"><Maximize2 size={18} /></button>
         <button type="button" onClick={() => setIndex(i => (i + 1) % items.length)} aria-label={copy.next} className="rounded-lg border p-3 hover:bg-gray-50"><ChevronRight size={18} /></button>
       </div>
-      <div className="mt-2 flex gap-2 overflow-x-auto pb-2">
+      <div className="mt-2 flex w-full min-w-0 max-w-full gap-2 overflow-x-auto pb-2">
         {items.map((item, i) => (
           <button key={i} type="button" onClick={() => setIndex(i)} aria-label={item.kind === 'tour' ? copy.tour : copy.photo + ' ' + (i === 0 ? 1 : i)} aria-pressed={index === i}
             className={`relative h-20 w-24 shrink-0 overflow-hidden rounded-xl border-2 ${index === i ? 'border-[#2563EB]' : 'border-transparent opacity-70 hover:opacity-100'}`}>

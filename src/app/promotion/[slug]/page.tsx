@@ -131,7 +131,7 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
       {/* The Space Section */}
       <section id="space" className="py-24">
         <div className="max-w-[1180px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-[72px] items-start">
-          <div className="relative">
+          <div className="relative min-w-0">
             {house.virtualTourUrl ? (
               <HouseTourGallery key={house.slug} images={house.images} tourUrl={house.virtualTourUrl} name={model.name} />
             ) : (
