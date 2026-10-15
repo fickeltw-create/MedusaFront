@@ -3,6 +3,7 @@
 import { useState, use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import HouseDocuments from '@/components/HouseDocuments';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HouseTourGallery from '@/components/HouseTourGallery';
@@ -369,6 +370,7 @@ export default function PromotionDetailPage({ params }: { params: Promise<{ slug
                     <span className="text-xs text-white/50">{t.promotions.readyToLive}</span>
                   </li>
                 </ul>
+                <HouseDocuments />
               </div>
 
               {/* Right Side: CTA Buttons - Stacked Vertically */}
