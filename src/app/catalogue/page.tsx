@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import HouseDocuments from '@/components/HouseDocuments';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 // static image previews — no 3D viewer or color controls on catalogue
@@ -105,6 +106,8 @@ export default function CataloguePage() {
                         </span>
                       ))}
                     </div>
+
+                    <HouseDocuments />
 
                     {/* Pricing */}
                     <div className="bg-[#F8FAFC] rounded-xl p-4 mb-4 mt-auto">

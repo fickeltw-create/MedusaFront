@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import HouseDocuments from '@/components/HouseDocuments';
 import Link from 'next/link';
 import { useI18n } from '@/lib/i18n';
 import { HOUSES, formatPrice } from '@/lib/houses';
@@ -42,9 +43,8 @@ export default function CatalogPreview() {
           {preview.map((house, i) => {
             const model = t.models[house.key];
             return (
-              <Link
+              <div
                 key={house.slug}
-                href={`/catalogue/${house.slug}`}
                 className={`group block bg-white rounded-[1.5rem] overflow-hidden shadow-premium card-hover border border-gray-100 transition-all duration-700 ${
                   visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
@@ -59,14 +59,14 @@ export default function CatalogPreview() {
                   {house.isNew && (
                     <span className="absolute top-3 right-3 z-10 label-badge bg-green-500 text-white text-xs">{t.catalog.newLabel}</span>
                   )}
-                  <img src={house.image} alt={model.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Link href={`/catalogue/${house.slug}`}><img src={house.image} alt={model.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" /></Link>
                   <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg opacity-90">
                     <Maximize2 size={10} />{house.size} m²
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <h3 className="font-syne font-bold text-lg text-[#0F172A] mb-1">{model.name}</h3>
+                  <h3 className="font-syne font-bold text-lg text-[#0F172A] mb-1"><Link href={`/catalogue/${house.slug}`} className="hover:underline">{model.name}</Link></h3>
                   <p className="text-[#6B7280] text-sm mb-4 line-clamp-2">{model.tagline}</p>
 
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -76,6 +76,8 @@ export default function CatalogPreview() {
                       </span>
                     ))}
                   </div>
+
+                  <HouseDocuments />
 
                   <div className="flex items-end justify-between pt-4 border-t border-gray-100">
                     <div>
@@ -90,7 +92,7 @@ export default function CatalogPreview() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

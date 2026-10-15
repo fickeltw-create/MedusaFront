@@ -3,6 +3,7 @@
 import { useState, use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import HouseDocuments from '@/components/HouseDocuments';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HouseTourGallery from '@/components/HouseTourGallery';
@@ -179,6 +180,7 @@ export default function HouseDetailPage({ params }: { params: Promise<{ slug: st
             </div>
 
             {activeTab === 'features' && (
+              <div>
               <ul className="space-y-2">
                 {model.features.map((f: string, i: number) => (
                   <li key={i} className="flex items-center gap-3 text-sm text-[#374151]">
@@ -187,6 +189,8 @@ export default function HouseDetailPage({ params }: { params: Promise<{ slug: st
                   </li>
                 ))}
               </ul>
+              <HouseDocuments />
+              </div>
             )}
             {activeTab === 'specs' && (
               <div className="space-y-2">
