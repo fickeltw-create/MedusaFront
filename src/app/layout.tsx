@@ -1,8 +1,9 @@
-﻿import './globals.css'
+import './globals.css'
 import '../styles/globals.css'
 import type { Metadata } from 'next'
 import { I18nProvider } from '@/lib/i18n'
 import { CartProvider } from '@/contexts/CartContext'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://modura.be'),
@@ -55,6 +56,21 @@ export default function RootLayout({
             <main className="relative">{children}</main>
           </CartProvider>
         </I18nProvider>
+
+        {/* Google Analytics Scripts */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || 'G-Q88CHCFZXW'}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || 'G-Q88CHCFZXW'}');
+          `}
+        </Script>
+        
       </body>
     </html>
   )
